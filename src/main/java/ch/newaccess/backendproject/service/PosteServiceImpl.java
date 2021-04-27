@@ -1,0 +1,40 @@
+package ch.newaccess.backendproject.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ch.newaccess.backendproject.entities.Poste;
+import ch.newaccess.backendproject.repository.IPosteRepository;
+@Service
+public class PosteServiceImpl implements IPosteService {
+	@Autowired
+public IPosteRepository posteRepository;
+	@Override
+	public Optional<Poste> findPoste(Long idPoste) {
+		return posteRepository.findById(idPoste);
+	}
+
+	@Override
+	public Poste addPoste(Poste d) {
+		return posteRepository.save(d);
+	}
+
+	@Override
+	public List<Poste> listePoste() {
+		return posteRepository.findAll();
+	}
+
+	@Override
+	public Poste updatePoste(Poste d) {
+		return posteRepository.save(d);
+	}
+
+	@Override
+	public void deletePoste(Long idPoste) {
+		posteRepository.deleteById(idPoste);
+	}
+
+}
