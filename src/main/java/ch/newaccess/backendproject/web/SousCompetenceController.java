@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.newaccess.backendproject.entities.SousCompetence;
@@ -19,8 +20,8 @@ import ch.newaccess.backendproject.service.ISousCompetenceService;
 public class SousCompetenceController {
 	@Autowired
 	public ISousCompetenceService sousCompetenceService;
-	@GetMapping("/sousCompetence/{sousCompetence-id}")
-	public Optional<SousCompetence> listDocumentsAdministratif(@PathVariable("sousCompetence-id") Long id){
+	@GetMapping("/sousCompetence")
+	public Optional<SousCompetence> listDocumentsAdministratif(@RequestParam("sousCompetence-id") Long id){
 		return sousCompetenceService.findSousCompetence(id);
 	}
 	@PostMapping("/add-sousCompetence")
@@ -31,7 +32,7 @@ public class SousCompetenceController {
 	public List<SousCompetence> listerSousCompetence(){
 		return sousCompetenceService.listeSousCompetence();
 	}
-	@DeleteMapping("/remove/{sousCompetence-id}")
+	@DeleteMapping("/removeSousCompetence/{sousCompetence-id}")
 	public void deleteSousCompetence(@PathVariable("sousCompetence-id") Long id){
 		sousCompetenceService.deleteSousCompetence(id);
 	}

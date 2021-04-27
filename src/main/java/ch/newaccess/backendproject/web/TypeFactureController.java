@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.newaccess.backendproject.entities.TypeFacture;
@@ -19,11 +20,11 @@ import ch.newaccess.backendproject.service.ITypeFactureService;
 public class TypeFactureController {
 	@Autowired
 	public ITypeFactureService typeFactureService;
-	@GetMapping("/typeFacture/{typeFacture-id}")
-	public Optional<TypeFacture> listDocumentsAdministratif(@PathVariable("typeFacture-id") Long id){
+	@GetMapping("/typeFacture")
+	public Optional<TypeFacture> listDocumentsAdministratif(@RequestParam("typeFacture-id") Long id){
 		return typeFactureService.findTypeFacture(id);
 	}
-	@PostMapping("/add-typeFacture")
+	@PostMapping("/add-typesFactures")
 	public TypeFacture addTypeFacture(@RequestBody TypeFacture d) {
 		return typeFactureService.addTypeFacture(d);
 	}
@@ -31,7 +32,7 @@ public class TypeFactureController {
 	public List<TypeFacture> listerTypeFacture(){
 		return typeFactureService.listeTypeFacture();
 	}
-	@DeleteMapping("/remove/{typeFacture-id}")
+	@DeleteMapping("/removeTypeFacture/{typeFacture-id}")
 	public void deleteTypeFacture(@PathVariable("typeFacture-id") Long id){
 		typeFactureService.deleteTypeFacture(id);
 	}

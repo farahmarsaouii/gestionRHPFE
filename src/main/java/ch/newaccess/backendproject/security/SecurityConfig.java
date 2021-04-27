@@ -43,6 +43,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	http.authorizeRequests().antMatchers(HttpMethod.GET,"/document/**").permitAll();
 	http.authorizeRequests().antMatchers(HttpMethod.GET,"/**").permitAll();
 	http.authorizeRequests().antMatchers(HttpMethod.POST,"/**").permitAll();
+	http.authorizeRequests().antMatchers(HttpMethod.PUT,"**").permitAll();
 	http.authorizeRequests().antMatchers(HttpMethod.DELETE,"**").permitAll();
 	//http.authorizeRequests().antMatchers(HttpMethod.GET,"/tasks/**").hasAuthority(****** privilege******);
 	//http.authorizeRequests().antMatchers(HttpMethod.GET,"/tasks/**").hasAuthority("accessToData");

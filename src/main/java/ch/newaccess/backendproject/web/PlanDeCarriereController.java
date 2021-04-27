@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.newaccess.backendproject.entities.PlanDeCarriere;
@@ -20,8 +21,8 @@ public class PlanDeCarriereController {
 	@Autowired
 public IPlanDeCarriereService planDeCarriereService;
 	
-	@GetMapping("/planDeCarriere/{planDeCarriere-id}")
-	public Optional<PlanDeCarriere> listPlanDeCarriere(@PathVariable("planDeCarriere-id") Long id){
+	@GetMapping("/planDeCarriere")
+	public Optional<PlanDeCarriere> listPlanDeCarriere(@RequestParam("planDeCarriere-id") Long id){
 		return planDeCarriereService.findPlanDeCarriere(id);
 	}
 	@PostMapping("/add-planDeCarriere")
@@ -32,7 +33,7 @@ public IPlanDeCarriereService planDeCarriereService;
 	public List<PlanDeCarriere> listerPlanDeCarriere(){
 		return planDeCarriereService.listePlanDeCarriere();
 	}
-	@DeleteMapping("/remove/{planDeCarriere-id}")
+	@DeleteMapping("/removePlanDeCarriere/{planDeCarriere-id}")
 	public void deletePlanDeCarriere(@PathVariable("planDeCarriere-id") Long id){
 		planDeCarriereService.deletePlanDeCarriere(id);
 	}

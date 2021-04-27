@@ -32,8 +32,18 @@ public List<DocumentAdministratif> listeDocumentAdministratif() {
 
 @Override
 public DocumentAdministratif updateDocumentAdministratif(DocumentAdministratif d) {
+	DocumentAdministratif document=documentAdministratifRepository.findById(d.getId()).get();
+	document.setContenuDocument(d.getContenuDocument());
+	document.setDateCreation(d.getDateCreation());
+	document.setDateModf(d.getDateModf());
+	document.setFooterDocument(d.getFooterDocument());
+	document.setHeaderDocument(d.getHeaderDocument());
+	document.setTitreDocument(d.getTitreDocument());
+	document.setNomDocument(d.getNomDocument());
+	document.setType(d.getType());
 	
-	return documentAdministratifRepository.save(d);
+	
+	return documentAdministratifRepository.save(document);
 }
 
 @Override

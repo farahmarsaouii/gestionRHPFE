@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.newaccess.backendproject.entities.Poste;
@@ -20,8 +21,8 @@ public class PosteController {
 	@Autowired
 	public IPosteService posteService;
 
-	@GetMapping("/poste/{poste-id}")
-	public Optional<Poste> listDocumentsAdministratif(@PathVariable("poste-id") Long id){
+	@GetMapping("/poste")
+	public Optional<Poste> listDocumentsAdministratif(@RequestParam("poste-id") Long id){
 		return posteService.findPoste(id);
 	}
 	@PostMapping("/add-poste")
@@ -32,7 +33,7 @@ public class PosteController {
 	public List<Poste> listerPoste(){
 		return posteService.listePoste();
 	}
-	@DeleteMapping("/remove/{poste-id}")
+	@DeleteMapping("/removePoste/{poste-id}")
 	public void deletePoste(@PathVariable("poste-id") Long id){
 		posteService.deletePoste(id);
 	}

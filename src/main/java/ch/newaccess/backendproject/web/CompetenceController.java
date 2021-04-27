@@ -29,7 +29,7 @@ public ICompetenceService competenceServiceImpl;
 	public List<Competence> listerCompetence(){
 		return competenceServiceImpl.listeCompetence();
 	}
-	@DeleteMapping("/remove/{competence-id}")
+	@DeleteMapping("/removeCompetence/{competence-id}")
 	public void deleteCompetence(@PathVariable("competence-id") Long id){
 		competenceServiceImpl.deleteCompetence(id);
 	}

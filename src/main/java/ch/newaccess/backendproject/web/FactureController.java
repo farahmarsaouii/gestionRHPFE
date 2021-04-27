@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.newaccess.backendproject.entities.Facture;
@@ -20,8 +21,8 @@ import ch.newaccess.backendproject.service.IFactureService;
 public class FactureController {
 	@Autowired
 	public IFactureService factureService;
-	@GetMapping("/facture/{facture-id}")
-	public Optional<Facture> listDocumentsAdministratif(@PathVariable("facture-id") Long id){
+	@GetMapping("/facture")
+	public Optional<Facture> listDocumentsAdministratif(@RequestParam("facture-id") Long id){
 		return factureService.findFacture(id);
 	}
 	@PostMapping("/add-facture")
@@ -32,7 +33,7 @@ public class FactureController {
 	public List<Facture> listerfacture(){
 		return factureService.listeFacture();
 	}
-	@DeleteMapping("/remove/{facture-id}")
+	@DeleteMapping("/removeFactures/{facture-id}")
 	public void deletefacture(@PathVariable("facture-id") Long id){
 		factureService.deleteFacture(id);
 	}

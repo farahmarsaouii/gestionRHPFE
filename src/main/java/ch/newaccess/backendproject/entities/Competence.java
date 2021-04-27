@@ -23,6 +23,8 @@ public class Competence{
 	private Collection<SousCompetence> sousCompetences =new ArrayList<SousCompetence>();
 	@ManyToOne
 	private PlanDeCarriere planDeCarriere;
+	
+	
 	public Competence(Long id, String type, String nomCompetence, Collection<Evaluation> evaluation,
 			Collection<SousCompetence> sousCompetences, PlanDeCarriere planDeCarriere) {
 		super();

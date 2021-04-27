@@ -16,6 +16,7 @@ public class Poste{
 	private String nomPoste;
 	@OneToMany(mappedBy = "poste")
 	private Collection<AppUser> user =new ArrayList<AppUser>();
+	
 	public Poste(Long id, String nomPoste, Collection<AppUser> user) {
 		super();
 		this.id = id;
