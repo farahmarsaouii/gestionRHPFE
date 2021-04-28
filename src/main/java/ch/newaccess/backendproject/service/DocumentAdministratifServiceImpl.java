@@ -1,5 +1,6 @@
 package ch.newaccess.backendproject.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,7 @@ public DocumentAdministratif updateDocumentAdministratif(DocumentAdministratif d
 	document.setTitreDocument(d.getTitreDocument());
 	document.setNomDocument(d.getNomDocument());
 	document.setType(d.getType());
+	document.setDateModf(new Date());
 	
 	
 	return documentAdministratifRepository.save(document);
