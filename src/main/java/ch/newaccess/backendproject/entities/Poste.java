@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,15 +15,20 @@ public class Poste{
 	@Id	@GeneratedValue
 	private Long id;
 	private String nomPoste;
-	@OneToMany(mappedBy = "poste")
-	private Collection<AppUser> user =new ArrayList<AppUser>();
 	
-	public Poste(Long id, String nomPoste, Collection<AppUser> user) {
+
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "poste")
+	private Collection<PlanDeCarriere> planDeCarriere =new ArrayList<PlanDeCarriere>();
+	
+	
+	public Poste(Long id, String nomPoste,Collection<PlanDeCarriere> planDeCarriere) {
 		super();
 		this.id = id;
 		this.nomPoste = nomPoste;
-		this.user = user;
+		this.planDeCarriere = planDeCarriere;
 	}
+
 	public Poste() {
 		super();
 	}
@@ -38,11 +44,12 @@ public class Poste{
 	public void setNomPoste(String nomPoste) {
 		this.nomPoste = nomPoste;
 	}
-	public Collection<AppUser> getUser() {
-		return user;
+	public Collection<PlanDeCarriere> getPlanDeCarriere() {
+		return planDeCarriere;
 	}
-	public void setUser(Collection<AppUser> user) {
-		this.user = user;
+
+	public void setPlanDeCarriere(Collection<PlanDeCarriere> planDeCarriere) {
+		this.planDeCarriere = planDeCarriere;
 	}
 	
 	

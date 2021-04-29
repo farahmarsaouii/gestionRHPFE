@@ -37,4 +37,9 @@ public class CompetenceServiceImpl implements ICompetenceService{
 		
 	}
 
+	@Override
+	public List<Competence> findPosteByNiveau(String niveau) {
+		return competenceRepository.findByNiveau(niveau);
+	}
+
 }

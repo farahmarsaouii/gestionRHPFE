@@ -32,18 +32,67 @@ private Long id;
 	private AppRole role ;
 @ManyToOne
 private Oragnigramme organigramme;
-@ManyToOne
-private Poste poste;
+
+@OneToMany(fetch = FetchType.LAZY,mappedBy = "emplyee")
+private Collection<PlanDeCarriere> planDeCarriere =new ArrayList<PlanDeCarriere>();
 
 @OneToMany(fetch = FetchType.LAZY,mappedBy = "emplyee")
 @JsonIgnore
 private Collection<DemandeDocument> demandeDocument =new ArrayList<DemandeDocument>();
+
 @OneToMany(mappedBy = "drh")
 private Collection<DocumentAdministratif> documentAdministratif =new ArrayList<DocumentAdministratif>();
-@OneToMany(mappedBy = "competenceEmplyee")
-private Collection<Evaluation> evaluation =new ArrayList<Evaluation>();
 
 
+
+public void setRoles(AppRole role) {
+	this.role = role;
+}
+public AppUser(Long id, String userName, String password, AppRole role) {
+	super();
+	this.id = id;
+	this.userName = userName;
+	this.password = password;
+	this.role = role;
+}
+public AppUser(String userName, String password) {
+	super();
+
+	this.userName = userName;
+	this.password = password;
+	
+}
+public AppUser(Long id, String userName, String password, AppRole role, Oragnigramme organigramme,
+		Collection<DemandeDocument> demandeDocument, Collection<DocumentAdministratif> documentAdministratif) {
+	super();
+	this.id = id;
+	this.userName = userName;
+	this.password = password;
+	this.role = role;
+	this.organigramme = organigramme;
+	this.demandeDocument = demandeDocument;
+	this.documentAdministratif = documentAdministratif;
+	
+}
+
+
+public AppUser(Long id, String userName, String password, String photo, String email, int cin, String repassword,
+		AppRole role, Oragnigramme organigramme, Collection<PlanDeCarriere> planDeCarriere,
+		Collection<DemandeDocument> demandeDocument, Collection<DocumentAdministratif> documentAdministratif) {
+	super();
+	this.id = id;
+	this.userName = userName;
+	this.password = password;
+	this.photo = photo;
+	this.email = email;
+	this.cin = cin;
+	this.repassword = repassword;
+	this.role = role;
+	this.organigramme = organigramme;
+	this.planDeCarriere = planDeCarriere;
+	this.demandeDocument = demandeDocument;
+	this.documentAdministratif = documentAdministratif;
+}
 
 public String getEmail() {
 	return email;
@@ -78,49 +127,12 @@ public void setPassword(String password) {
 
 public AppRole getRole() {
 	return role;
-}
-public void setRoles(AppRole role) {
-	this.role = role;
-}
-public AppUser(Long id, String userName, String password, AppRole role) {
-	super();
-	this.id = id;
-	this.userName = userName;
-	this.password = password;
-	this.role = role;
-}
-public AppUser(String userName, String password) {
-	super();
-
-	this.userName = userName;
-	this.password = password;
-	
-}
-public AppUser(Long id, String userName, String password, AppRole role, Oragnigramme organigramme, Poste poste,
-		Collection<DemandeDocument> demandeDocument, Collection<DocumentAdministratif> documentAdministratif,
-		Collection<Evaluation> evaluation) {
-	super();
-	this.id = id;
-	this.userName = userName;
-	this.password = password;
-	this.role = role;
-	this.organigramme = organigramme;
-	this.poste = poste;
-	this.demandeDocument = demandeDocument;
-	this.documentAdministratif = documentAdministratif;
-	this.evaluation = evaluation;
-}
+} 
 public Oragnigramme getOrganigramme() {
 	return organigramme;
 }
 public void setOrganigramme(Oragnigramme organigramme) {
 	this.organigramme = organigramme;
-}
-public Poste getPoste() {
-	return poste;
-}
-public void setPoste(Poste poste) {
-	this.poste = poste;
 }
 public Collection<DemandeDocument> getDemandeDocument() {
 	return demandeDocument;
@@ -134,12 +146,7 @@ public Collection<DocumentAdministratif> getDocumentAdministratif() {
 public void setDocumentAdministratif(Collection<DocumentAdministratif> documentAdministratif) {
 	this.documentAdministratif = documentAdministratif;
 }
-public Collection<Evaluation> getEvaluation() {
-	return evaluation;
-}
-public void setEvaluation(Collection<Evaluation> evaluation) {
-	this.evaluation = evaluation;
-}
+
 public void setRole(AppRole role) {
 	this.role = role;
 }
@@ -154,6 +161,18 @@ public int getCin() {
 }
 public void setCin(int cin) {
 	this.cin = cin;
+}
+public String getRepassword() {
+	return repassword;
+}
+public void setRepassword(String repassword) {
+	this.repassword = repassword;
+}
+public Collection<PlanDeCarriere> getPlanDeCarriere() {
+	return planDeCarriere;
+}
+public void setPlanDeCarriere(Collection<PlanDeCarriere> planDeCarriere) {
+	this.planDeCarriere = planDeCarriere;
 }
 
 

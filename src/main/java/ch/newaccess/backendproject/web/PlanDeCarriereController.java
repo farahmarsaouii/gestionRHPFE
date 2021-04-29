@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.newaccess.backendproject.entities.PlanDeCarriere;
+import ch.newaccess.backendproject.entities.Poste;
 import ch.newaccess.backendproject.service.IPlanDeCarriereService;
+import ch.newaccess.backendproject.service.IPosteService;
 
 @RestController
 public class PlanDeCarriereController {
 	@Autowired
 public IPlanDeCarriereService planDeCarriereService;
+	@Autowired
+	public IPosteService posteService;
 	
 	@GetMapping("/planDeCarriere")
 	public Optional<PlanDeCarriere> listPlanDeCarriere(@RequestParam("planDeCarriere-id") Long id){
@@ -41,4 +45,9 @@ public IPlanDeCarriereService planDeCarriereService;
 	public PlanDeCarriere updatePlanDeCarriere(@RequestBody PlanDeCarriere d) {
 		return planDeCarriereService.updatePlanDeCarriere(d);
 	}
+	@GetMapping("/planDeCarrieresParPoste")
+	public List<PlanDeCarriere> listerPlanDeCarriereParPoste(@RequestParam("idPoste") Long idposte){
+		Poste poste=posteService.findPoste(idposte);
+		return planDeCarriereService.findPlanDeCarriereByPoste(poste);
+}
 }

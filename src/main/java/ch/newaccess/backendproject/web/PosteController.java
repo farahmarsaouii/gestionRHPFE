@@ -22,7 +22,7 @@ public class PosteController {
 	public IPosteService posteService;
 
 	@GetMapping("/poste")
-	public Optional<Poste> listDocumentsAdministratif(@RequestParam("poste-id") Long id){
+	public Poste findposte(@RequestParam("poste-id") Long id){
 		return posteService.findPoste(id);
 	}
 	@PostMapping("/add-poste")
@@ -30,7 +30,7 @@ public class PosteController {
 		return posteService.addPoste(d);
 	}
 	@GetMapping("/postes")
-	public List<Poste> listerPoste(){
+	public List<Poste> findPostes(){
 		return posteService.listePoste();
 	}
 	@DeleteMapping("/removePoste/{poste-id}")

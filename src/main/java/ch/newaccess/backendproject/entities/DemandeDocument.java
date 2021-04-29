@@ -20,10 +20,8 @@ private String raisonDocument;
 private String commentaire;
 	
 	@ManyToOne
-	
 	private DocumentAdministratif documentAdministratif;
-	@ManyToOne()
-	
+	@ManyToOne
 	private AppUser emplyee;
 	
 	public DemandeDocument(Long id, Date date, String raisonDocument, String commentaire,

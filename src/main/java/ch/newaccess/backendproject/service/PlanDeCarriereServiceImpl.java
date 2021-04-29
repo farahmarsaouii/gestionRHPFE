@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ch.newaccess.backendproject.entities.PlanDeCarriere;
+import ch.newaccess.backendproject.entities.Poste;
 import ch.newaccess.backendproject.repository.IPlanDeCarriereRepository;
 @Service
 public class PlanDeCarriereServiceImpl implements IPlanDeCarriereService{
@@ -35,6 +36,11 @@ public IPlanDeCarriereRepository planDeCarriereRepository;
 	@Override
 	public void deletePlanDeCarriere(Long idPlanDeCarriere) {
 		planDeCarriereRepository.deleteById(idPlanDeCarriere);
+	}
+
+	@Override
+	public List<PlanDeCarriere> findPlanDeCarriereByPoste(Poste poste) {
+		return planDeCarriereRepository.findByPoste(poste);
 	}
 
 }

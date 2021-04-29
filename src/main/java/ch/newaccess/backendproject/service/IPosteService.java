@@ -6,7 +6,7 @@ import java.util.Optional;
 import ch.newaccess.backendproject.entities.Poste;
 
 public interface IPosteService {
-	public Optional<Poste> findPoste(Long idPoste);
+	public Poste findPoste(Long idPoste);
 	public Poste addPoste(Poste d);
 	public List<Poste> listePoste();
 	public Poste updatePoste(Poste d);

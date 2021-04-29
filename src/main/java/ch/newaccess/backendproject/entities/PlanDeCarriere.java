@@ -8,19 +8,37 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class PlanDeCarriere{
-	@Id	@GeneratedValue
+	@Id	
+	@GeneratedValue
 	private Long id;
+	
+	@ManyToOne
+	private AppUser emplyee;
+	@ManyToOne
+	private Poste poste;
 	@OneToMany(mappedBy = "planDeCarriere")
 	private Collection<Competence> competences =new ArrayList<Competence>();
+	
+	
 	public PlanDeCarriere(Long id, Collection<Competence> competences) {
 		super();
 		this.id = id;
 		this.competences = competences;
 	}
+	
+	public PlanDeCarriere(Long id, AppUser emplyee, Poste poste, Collection<Competence> competences) {
+		super();
+		this.id = id;
+		this.emplyee = emplyee;
+		this.poste = poste;
+		this.competences = competences;
+	}
+
 	public PlanDeCarriere() {
 		super();
 	}
@@ -35,6 +53,22 @@ public class PlanDeCarriere{
 	}
 	public void setCompetences(Collection<Competence> competences) {
 		this.competences = competences;
+	}
+
+	public AppUser getEmplyee() {
+		return emplyee;
+	}
+
+	public void setEmplyee(AppUser emplyee) {
+		this.emplyee = emplyee;
+	}
+
+	public Poste getPoste() {
+		return poste;
+	}
+
+	public void setPoste(Poste poste) {
+		this.poste = poste;
 	}
 	
 	

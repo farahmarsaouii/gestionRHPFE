@@ -16,22 +16,24 @@ public class Competence{
 	private Long id;
 	private String type;
 	private String nomCompetence;
+	private Boolean evaluation;
+	public String niveau;
 	
-	@OneToMany(mappedBy = "competence")
-	private Collection<Evaluation> evaluation =new ArrayList<Evaluation>();
+	
 	@OneToMany(mappedBy = "competences")
 	private Collection<SousCompetence> sousCompetences =new ArrayList<SousCompetence>();
 	@ManyToOne
 	private PlanDeCarriere planDeCarriere;
 	
 	
-	public Competence(Long id, String type, String nomCompetence, Collection<Evaluation> evaluation,
+	public Competence(Long id, String type, String nomCompetence, Boolean evaluation, String niveau,
 			Collection<SousCompetence> sousCompetences, PlanDeCarriere planDeCarriere) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.nomCompetence = nomCompetence;
 		this.evaluation = evaluation;
+		this.niveau = niveau;
 		this.sousCompetences = sousCompetences;
 		this.planDeCarriere = planDeCarriere;
 	}
@@ -56,12 +58,7 @@ public class Competence{
 	public void setNomCompetence(String nomCompetence) {
 		this.nomCompetence = nomCompetence;
 	}
-	public Collection<Evaluation> getEvaluation() {
-		return evaluation;
-	}
-	public void setEvaluation(Collection<Evaluation> evaluation) {
-		this.evaluation = evaluation;
-	}
+	
 	public Collection<SousCompetence> getSousCompetences() {
 		return sousCompetences;
 	}
@@ -73,6 +70,18 @@ public class Competence{
 	}
 	public void setPlanDeCarriere(PlanDeCarriere planDeCarriere) {
 		this.planDeCarriere = planDeCarriere;
+	}
+	public Boolean getEvaluation() {
+		return evaluation;
+	}
+	public void setEvaluation(Boolean evaluation) {
+		this.evaluation = evaluation;
+	}
+	public String getNiveau() {
+		return niveau;
+	}
+	public void setNiveau(String niveau) {
+		this.niveau = niveau;
 	}
 	
 	

@@ -13,8 +13,8 @@ public class PosteServiceImpl implements IPosteService {
 	@Autowired
 public IPosteRepository posteRepository;
 	@Override
-	public Optional<Poste> findPoste(Long idPoste) {
-		return posteRepository.findById(idPoste);
+	public Poste findPoste(Long idPoste) {
+		return posteRepository.findById(idPoste).get();
 	}
 
 	@Override
