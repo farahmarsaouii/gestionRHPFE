@@ -43,6 +43,10 @@ private AccountService accountService;
 		return accountService.findUserByUsername(userName);
 	}
 	
-	
+	public AppUser findUserByid(Long id) {
+		System.out.print("hello heloooooo");
+		return accountService.findUserByid(id);
+		
+	}
 }
 

@@ -18,7 +18,7 @@ public class Poste{
 	
 
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "poste")
+	@OneToMany(mappedBy = "poste")
 	private Collection<PlanDeCarriere> planDeCarriere =new ArrayList<PlanDeCarriere>();
 	
 	

@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.PlanDeCarriere;
 import ch.newaccess.backendproject.entities.Poste;
 import ch.newaccess.backendproject.service.IPlanDeCarriereService;
 import ch.newaccess.backendproject.service.IPosteService;
+import ch.newaccess.backendproject.service.UserDetailsServiceImpl;
 
 @RestController
 public class PlanDeCarriereController {
@@ -24,9 +26,11 @@ public class PlanDeCarriereController {
 public IPlanDeCarriereService planDeCarriereService;
 	@Autowired
 	public IPosteService posteService;
+	@Autowired
+	private UserDetailsServiceImpl userService;
 	
 	@GetMapping("/planDeCarriere")
-	public Optional<PlanDeCarriere> listPlanDeCarriere(@RequestParam("planDeCarriere-id") Long id){
+	public Optional<PlanDeCarriere> findPlanDeCarrierebyid(@RequestParam("planDeCarriere-id") Long id){
 		return planDeCarriereService.findPlanDeCarriere(id);
 	}
 	@PostMapping("/add-planDeCarriere")
@@ -46,8 +50,16 @@ public IPlanDeCarriereService planDeCarriereService;
 		return planDeCarriereService.updatePlanDeCarriere(d);
 	}
 	@GetMapping("/planDeCarrieresParPoste")
-	public List<PlanDeCarriere> listerPlanDeCarriereParPoste(@RequestParam("idPoste") Long idposte){
+	public PlanDeCarriere findPlanDeCarriereParPoste(@RequestParam("idPoste") Long idposte){
 		Poste poste=posteService.findPoste(idposte);
+		
 		return planDeCarriereService.findPlanDeCarriereByPoste(poste);
 }
+	@GetMapping("/planDeCarrieresParUser")
+	public PlanDeCarriere findPlanDeCarriereByEmplyee(@RequestParam("idUser") Long idUser) {
+		
+		AppUser user=userService.findUserByid(idUser);
+		return planDeCarriereService.findPlanDeCarriereByEmplyee(user);
+		
+	}
 }

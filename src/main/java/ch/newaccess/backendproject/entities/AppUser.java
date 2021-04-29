@@ -1,16 +1,16 @@
 package ch.newaccess.backendproject.entities;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -33,10 +33,10 @@ private Long id;
 @ManyToOne
 private Oragnigramme organigramme;
 
-@OneToMany(fetch = FetchType.LAZY,mappedBy = "emplyee")
+@OneToMany(mappedBy = "emplyee")
 private Collection<PlanDeCarriere> planDeCarriere =new ArrayList<PlanDeCarriere>();
 
-@OneToMany(fetch = FetchType.LAZY,mappedBy = "emplyee")
+@OneToMany(mappedBy = "emplyee")
 @JsonIgnore
 private Collection<DemandeDocument> demandeDocument =new ArrayList<DemandeDocument>();
 
