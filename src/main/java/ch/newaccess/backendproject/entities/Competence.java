@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Competence{
 	@Id	@GeneratedValue
@@ -21,8 +23,10 @@ public class Competence{
 	
 	
 	@OneToMany(mappedBy = "competences")
+	@JsonIgnore
 	private Collection<SousCompetence> sousCompetences =new ArrayList<SousCompetence>();
 	@ManyToOne
+	@JsonIgnore
 	private PlanDeCarriere planDeCarriere;
 	
 	

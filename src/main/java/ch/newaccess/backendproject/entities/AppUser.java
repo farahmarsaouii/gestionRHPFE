@@ -1,6 +1,7 @@
 package ch.newaccess.backendproject.entities;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,7 +18,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class AppUser{
+public class AppUser implements Serializable{
 	@Id @GeneratedValue
 private Long id;
 	@Column(unique = true)
@@ -34,6 +35,7 @@ private Long id;
 private Oragnigramme organigramme;
 
 @OneToMany(mappedBy = "emplyee")
+@JsonIgnore
 private Collection<PlanDeCarriere> planDeCarriere =new ArrayList<PlanDeCarriere>();
 
 @OneToMany(mappedBy = "emplyee")

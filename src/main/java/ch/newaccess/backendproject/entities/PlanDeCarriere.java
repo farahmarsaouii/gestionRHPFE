@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class PlanDeCarriere{
 	@Id	
@@ -18,10 +20,14 @@ public class PlanDeCarriere{
 	private Long id;
 	
 	@ManyToOne
+	@JsonIgnore
 	private AppUser emplyee;
+
 	@ManyToOne
+	@JsonIgnore
 	private Poste poste;
 	@OneToMany(mappedBy = "planDeCarriere")
+	
 	private Collection<Competence> competences =new ArrayList<Competence>();
 	
 	
