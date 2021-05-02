@@ -2,6 +2,8 @@ package ch.newaccess.backendproject.service;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.newaccess.backendproject.entities.AppPrivilege;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
+import ch.newaccess.backendproject.entities.Equipe;
 import ch.newaccess.backendproject.repository.PrivilegeRepository;
 import ch.newaccess.backendproject.repository.RoleRespository;
 import ch.newaccess.backendproject.repository.UserRespository;
@@ -77,10 +80,11 @@ return userRespository.findById(id).get();
 		
 	}
 
+
 	@Override
-	public AppUser findUserByName(String userName) {
+	public List<AppUser> findByEquipeAndRole(Equipe equipe, AppRole role) {
 		// TODO Auto-generated method stub
-		return null;
+		return userRespository.findByEquipeAndRole(equipe,role) ;
 	}
 
 

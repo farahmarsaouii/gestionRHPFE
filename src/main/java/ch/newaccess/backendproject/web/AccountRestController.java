@@ -14,15 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Competence;
+import ch.newaccess.backendproject.entities.Equipe;
 import ch.newaccess.backendproject.entities.RegisterForm;
+import ch.newaccess.backendproject.repository.IEquipeRepository;
+import ch.newaccess.backendproject.repository.RoleRespository;
 import ch.newaccess.backendproject.service.AccountService;
 import ch.newaccess.backendproject.service.UserDetailsServiceImpl;
 
 @RestController
 public class AccountRestController {
 	@Autowired
-	private UserDetailsServiceImpl b;
-
+	private UserDetailsServiceImpl userDetailsService;
+	@Autowired
+	private RoleRespository roleRespository;
+	@Autowired
+	private IEquipeRepository equipeRespository;
 	@Autowired
 	private AccountService accountService;
 	@PostMapping("/register")
@@ -48,6 +54,16 @@ return appUser;
 	
 	@GetMapping("/userbyUsername/{usernameu}")
 	public AppUser userByName(@PathVariable("usernameu") String userName){
-		return b.findUserByName(userName);
+		return userDetailsService.findUserByName(userName);
 	
-}}
+}
+	@GetMapping("/getByEquipeAndRole")
+	public List<AppUser> getByEquipeAndRole(@RequestParam("idequipe") Long idequipe){
+		AppRole role = roleRespository.findByrole("USER");
+		Equipe equipe = equipeRespository.findById(idequipe).get();
+		
+		return accountService.findByEquipeAndRole(equipe, role);
+	
+}
+	
+}

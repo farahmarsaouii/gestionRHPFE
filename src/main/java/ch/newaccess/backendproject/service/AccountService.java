@@ -1,8 +1,11 @@
 package ch.newaccess.backendproject.service;
 
+import java.util.List;
+
 import ch.newaccess.backendproject.entities.AppPrivilege;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
+import ch.newaccess.backendproject.entities.Equipe;
 
 public interface AccountService {
 	public AppUser saveUser(AppUser user);
@@ -12,7 +15,8 @@ public interface AccountService {
 	public void addPrivilegeToRole(String privilegeName,String roleName);
 	public AppUser findUserByUsername(String userName);
 	public AppUser findUserByid(Long id);
-	public AppUser findUserByName(String userName);
+
+	public List<AppUser> findByEquipeAndRole(Equipe equipe,AppRole role);
 
 
 }

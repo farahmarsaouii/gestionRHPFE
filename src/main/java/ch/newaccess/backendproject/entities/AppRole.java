@@ -12,14 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class AppRole{
 	@Id @GeneratedValue
 	private Long id;
 	private String role;
 	@ManyToMany(fetch=FetchType.EAGER)
+	@JsonIgnore
 	private Collection<AppPrivilege> privileges =new ArrayList<AppPrivilege>();
 	@OneToMany(mappedBy = "role")
+	@JsonIgnore
 	private Collection<AppUser> users =new ArrayList<AppUser>();
 	public Long getId() {
 		return id;

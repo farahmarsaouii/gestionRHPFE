@@ -28,9 +28,13 @@ private Long id;
 	private String email;
 	private int cin;
 	private String repassword;
+	private Long idSuperieurhierarchique;
 	
 @ManyToOne
 	private AppRole role ;
+@ManyToOne
+
+private Equipe equipe ;
 @ManyToOne
 private Oragnigramme organigramme;
 
@@ -175,6 +179,18 @@ public Collection<PlanDeCarriere> getPlanDeCarriere() {
 }
 public void setPlanDeCarriere(Collection<PlanDeCarriere> planDeCarriere) {
 	this.planDeCarriere = planDeCarriere;
+}
+/*public Long getIdSuperieurhierarchique() {
+	return idSuperieurhierarchique;
+}
+public void setIdSuperieurhierarchique(Long idSuperieurhierarchique) {
+	this.idSuperieurhierarchique = idSuperieurhierarchique;
+}*/
+public Equipe getEquipe() {
+	return equipe;
+}
+public void setEquipe(Equipe equipe) {
+	this.equipe = equipe;
 }
 
 
