@@ -180,18 +180,19 @@ public Collection<PlanDeCarriere> getPlanDeCarriere() {
 public void setPlanDeCarriere(Collection<PlanDeCarriere> planDeCarriere) {
 	this.planDeCarriere = planDeCarriere;
 }
-/*public Long getIdSuperieurhierarchique() {
+public Long getIdSuperieurhierarchique() {
 	return idSuperieurhierarchique;
 }
 public void setIdSuperieurhierarchique(Long idSuperieurhierarchique) {
 	this.idSuperieurhierarchique = idSuperieurhierarchique;
-}*/
+}
 public Equipe getEquipe() {
 	return equipe;
 }
 public void setEquipe(Equipe equipe) {
 	this.equipe = equipe;
 }
+
 
 
 }

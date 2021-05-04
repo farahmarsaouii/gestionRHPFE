@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Equipe;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
 	@Autowired

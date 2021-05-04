@@ -60,9 +60,10 @@ return appUser;
 	@GetMapping("/getByEquipeAndRole")
 	public List<AppUser> getByEquipeAndRole(@RequestParam("idequipe") Long idequipe){
 		AppRole role = roleRespository.findByrole("USER");
-		Equipe equipe = equipeRespository.findById(idequipe).get();
+	Equipe equipe = equipeRespository.findById(idequipe).get();
 		
 		return accountService.findByEquipeAndRole(equipe, role);
+		
 	
 }
 	

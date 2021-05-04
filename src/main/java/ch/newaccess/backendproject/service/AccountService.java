@@ -7,6 +7,7 @@ import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Equipe;
 
+
 public interface AccountService {
 	public AppUser saveUser(AppUser user);
 	public AppRole saveRole(AppRole role);
