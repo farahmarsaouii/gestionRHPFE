@@ -49,12 +49,12 @@ public IPlanDeCarriereService planDeCarriereService;
 	public PlanDeCarriere updatePlanDeCarriere(@RequestBody PlanDeCarriere d) {
 		return planDeCarriereService.updatePlanDeCarriere(d);
 	}
-	@GetMapping("/planDeCarrieresParPoste")
+/*	@GetMapping("/planDeCarrieresParPoste")
 	public PlanDeCarriere findPlanDeCarriereParPoste(@RequestParam("idPoste") Long idposte){
 		Poste poste=posteService.findPoste(idposte);
 		
 		return planDeCarriereService.findPlanDeCarriereByPoste(poste);
-}
+}*/
 	@GetMapping("/planDeCarrieresParUser")
 	public PlanDeCarriere findPlanDeCarriereByEmplyee(@RequestParam("idUser") Long idUser) {
 		

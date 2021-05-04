@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class SousCompetence{
 	@Id	@GeneratedValue
@@ -14,11 +16,17 @@ public class SousCompetence{
 	private String nomSousCompetence;
 	@ManyToOne
 	private Competence competences;
-	public SousCompetence(Long id, String nomSousCompetence, Competence competences) {
+	
+	@ManyToOne
+	private AppUser manager;
+	
+
+	public SousCompetence(Long id, String nomSousCompetence, Competence competences, AppUser manager) {
 		super();
 		this.id = id;
 		this.nomSousCompetence = nomSousCompetence;
 		this.competences = competences;
+		this.manager = manager;
 	}
 	public SousCompetence() {
 		super();
@@ -40,6 +48,12 @@ public class SousCompetence{
 	}
 	public void setCompetences(Competence competences) {
 		this.competences = competences;
+	}
+	public AppUser getManager() {
+		return manager;
+	}
+	public void setManager(AppUser manager) {
+		this.manager = manager;
 	}
 	
 	

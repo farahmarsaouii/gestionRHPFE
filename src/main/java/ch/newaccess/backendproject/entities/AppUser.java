@@ -14,6 +14,7 @@ import javax.persistence.Id;
 
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,16 +32,19 @@ private Long id;
 	private Long idSuperieurhierarchique;
 	
 @ManyToOne
-	private AppRole role ;
-@ManyToOne
+private AppRole role ;
 
+@ManyToOne
 private Equipe equipe ;
+
 @ManyToOne
 private Oragnigramme organigramme;
 
-@OneToMany(mappedBy = "emplyee")
-@JsonIgnore
-private Collection<PlanDeCarriere> planDeCarriere =new ArrayList<PlanDeCarriere>();
+@OneToOne(mappedBy = "emplyee")
+private PlanDeCarriere planDeCarriere;
+
+@ManyToOne
+private Poste poste;
 
 @OneToMany(mappedBy = "emplyee")
 @JsonIgnore
@@ -49,11 +53,15 @@ private Collection<DemandeDocument> demandeDocument =new ArrayList<DemandeDocume
 @OneToMany(mappedBy = "drh")
 private Collection<DocumentAdministratif> documentAdministratif =new ArrayList<DocumentAdministratif>();
 
+@OneToMany(mappedBy = "rh")
+@JsonIgnore
+private Collection<Competence> competence =new ArrayList<Competence>();
+
+@OneToMany(mappedBy = "manager")
+@JsonIgnore
+private Collection<SousCompetence> sousCompetence =new ArrayList<SousCompetence>();
 
 
-public void setRoles(AppRole role) {
-	this.role = role;
-}
 public AppUser(Long id, String userName, String password, AppRole role) {
 	super();
 	this.id = id;
@@ -82,9 +90,13 @@ public AppUser(Long id, String userName, String password, AppRole role, Oragnigr
 }
 
 
+
+
 public AppUser(Long id, String userName, String password, String photo, String email, int cin, String repassword,
-		AppRole role, Oragnigramme organigramme, Collection<PlanDeCarriere> planDeCarriere,
-		Collection<DemandeDocument> demandeDocument, Collection<DocumentAdministratif> documentAdministratif) {
+		Long idSuperieurhierarchique, AppRole role, Equipe equipe, Oragnigramme organigramme,
+		PlanDeCarriere planDeCarriere, Poste poste, Collection<DemandeDocument> demandeDocument,
+		Collection<DocumentAdministratif> documentAdministratif, Collection<Competence> competence,
+		Collection<SousCompetence> sousCompetence) {
 	super();
 	this.id = id;
 	this.userName = userName;
@@ -93,13 +105,17 @@ public AppUser(Long id, String userName, String password, String photo, String e
 	this.email = email;
 	this.cin = cin;
 	this.repassword = repassword;
+	this.idSuperieurhierarchique = idSuperieurhierarchique;
 	this.role = role;
+	this.equipe = equipe;
 	this.organigramme = organigramme;
 	this.planDeCarriere = planDeCarriere;
+	this.poste = poste;
 	this.demandeDocument = demandeDocument;
 	this.documentAdministratif = documentAdministratif;
+	this.competence = competence;
+	this.sousCompetence = sousCompetence;
 }
-
 public String getEmail() {
 	return email;
 }
@@ -174,10 +190,10 @@ public String getRepassword() {
 public void setRepassword(String repassword) {
 	this.repassword = repassword;
 }
-public Collection<PlanDeCarriere> getPlanDeCarriere() {
+public PlanDeCarriere getPlanDeCarriere() {
 	return planDeCarriere;
 }
-public void setPlanDeCarriere(Collection<PlanDeCarriere> planDeCarriere) {
+public void setPlanDeCarriere(PlanDeCarriere planDeCarriere) {
 	this.planDeCarriere = planDeCarriere;
 }
 /*public Long getIdSuperieurhierarchique() {
@@ -191,6 +207,30 @@ public Equipe getEquipe() {
 }
 public void setEquipe(Equipe equipe) {
 	this.equipe = equipe;
+}
+public Long getIdSuperieurhierarchique() {
+	return idSuperieurhierarchique;
+}
+public void setIdSuperieurhierarchique(Long idSuperieurhierarchique) {
+	this.idSuperieurhierarchique = idSuperieurhierarchique;
+}
+public Poste getPoste() {
+	return poste;
+}
+public void setPoste(Poste poste) {
+	this.poste = poste;
+}
+public Collection<Competence> getCompetence() {
+	return competence;
+}
+public void setCompetence(Collection<Competence> competence) {
+	this.competence = competence;
+}
+public Collection<SousCompetence> getSousCompetence() {
+	return sousCompetence;
+}
+public void setSousCompetence(Collection<SousCompetence> sousCompetence) {
+	this.sousCompetence = sousCompetence;
 }
 
 

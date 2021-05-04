@@ -15,6 +15,7 @@ public interface AccountService {
 	public void addPrivilegeToRole(String privilegeName,String roleName);
 	public AppUser findUserByUsername(String userName);
 	public AppUser findUserByid(Long id);
+	public 	List<AppRole> findRoles();
 
 	public List<AppUser> findByEquipeAndRole(Equipe equipe,AppRole role);
 

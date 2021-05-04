@@ -9,6 +9,6 @@ public Competence addCompetence(Competence c);
 public List<Competence> listeCompetence();
 public Competence updateCompetence(Competence c);
 public void deleteCompetence(Long idcompetence);
-public List<Competence> findPosteByNiveau(String niveau);
+
 
 }

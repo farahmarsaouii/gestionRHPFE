@@ -38,8 +38,8 @@ public ICompetenceService competenceServiceImpl;
 	public Competence updateCompetence(@RequestBody Competence d) {
 		return competenceServiceImpl.updateCompetence(d);
 	}
-	@GetMapping("/competencesParNiveau")
+/*	@GetMapping("/competencesParNiveau")
 	public List<Competence> CompetenceParNiveau(@RequestParam("niveau") String niveau){
 		return competenceServiceImpl.findPosteByNiveau(niveau);
-	}
+	}*/
 }

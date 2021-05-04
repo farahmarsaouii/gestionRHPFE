@@ -32,21 +32,30 @@ public class AccountRestController {
 	@Autowired
 	private AccountService accountService;
 	@PostMapping("/register")
-public AppUser register(@RequestBody RegisterForm userForm) {
+public AppUser register(@RequestBody AppUser userForm) {
 	
 		if(!userForm.getPassword().equals(userForm.getRepassword())) throw new RuntimeException("you must confirm your password");
 		AppUser user=accountService.findUserByUsername(userForm.getUserName());
 		if(user!=null) throw new RuntimeException("this user already exists");
 		
+	
+		
+		
 		//AppRole r=new AppRole();
 		AppUser appUser =new AppUser();
 		appUser.setUserName(userForm.getUserName());
 		appUser.setPassword(userForm.getPassword());
+		appUser.setRepassword(userForm.getRepassword());
+		appUser.setEmail(userForm.getEmail());
+		appUser.setCin(userForm.getCin());
+		appUser.setRole(userForm.getRole());
+		appUser.setEquipe(userForm.getEquipe());
+		System.out.println(appUser.getRole());
 accountService.saveUser(appUser);
 
-accountService.affectRoleToUser(userForm.getUserName(), "USER");
-accountService.addPrivilegeToRole("accessToData", "USER");
-accountService.addPrivilegeToRole("updateData", "USER");
+//accountService.affectRoleToUser(userForm.getUserName(), "USER");
+//accountService.addPrivilegeToRole("accessToData", "USER");
+//accountService.addPrivilegeToRole("updateData", "USER");
 
 
 return appUser;
@@ -65,5 +74,8 @@ return appUser;
 		return accountService.findByEquipeAndRole(equipe, role);
 	
 }
+	@GetMapping("/getRoles")
+	public List<AppRole> findRoles(){
+		return accountService.findRoles() ;}
 	
 }

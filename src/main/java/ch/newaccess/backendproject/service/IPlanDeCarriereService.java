@@ -13,6 +13,6 @@ public interface IPlanDeCarriereService {
 	public List<PlanDeCarriere> listePlanDeCarriere();
 	public PlanDeCarriere updatePlanDeCarriere(PlanDeCarriere d);
 	public void deletePlanDeCarriere(Long idPlanDeCarriere);
-	public PlanDeCarriere findPlanDeCarriereByPoste(Poste poste);
+	//public PlanDeCarriere findPlanDeCarriereByPoste(Poste poste);
 	public PlanDeCarriere findPlanDeCarriereByEmplyee(AppUser emplyee);
 }
