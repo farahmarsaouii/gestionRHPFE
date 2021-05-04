@@ -11,6 +11,6 @@ import ch.newaccess.backendproject.entities.Poste;
 
 
 public interface IPlanDeCarriereRepository extends JpaRepository<PlanDeCarriere,Long> {
-public PlanDeCarriere findByPoste(Poste poste);
+//public PlanDeCarriere findByPoste(Poste poste);
 public PlanDeCarriere findByEmplyee(AppUser emplyee);
 }

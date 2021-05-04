@@ -39,12 +39,7 @@ public IPlanDeCarriereRepository planDeCarriereRepository;
 		planDeCarriereRepository.deleteById(idPlanDeCarriere);
 	}
 
-	@Override
-	public PlanDeCarriere findPlanDeCarriereByPoste(Poste poste) {
-		
-		return planDeCarriereRepository.findByPoste(poste);
-	}
-
+	
 	@Override
 	public PlanDeCarriere findPlanDeCarriereByEmplyee(AppUser emplyee) {
 

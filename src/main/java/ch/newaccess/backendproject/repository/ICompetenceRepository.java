@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ch.newaccess.backendproject.entities.Competence;
 
 public interface ICompetenceRepository extends JpaRepository<Competence,Long>  {
-public List<Competence> findByNiveau(String niveau);
+
 }

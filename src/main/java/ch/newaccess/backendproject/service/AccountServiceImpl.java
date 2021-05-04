@@ -66,7 +66,8 @@ return userRespository.findById(id).get();
 	public void affectRoleToUser(String userName, String roleName) {
 		AppRole role = roleRespository.findByrole(roleName);
 		AppUser user =userRespository.findByUserName(userName);
-		user.setRoles(role);
+		user.setRole(role);
+		//setRoles(role);
 		
 		
 	}
@@ -87,6 +88,8 @@ return userRespository.findById(id).get();
 		return userRespository.findByEquipeAndRole(equipe,role) ;
 	}
 
-
+public 	List<AppRole> findRoles() {
+	return roleRespository.findAll();
+}
 
 }

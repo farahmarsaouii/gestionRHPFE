@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 @Entity
 public class Poste{
@@ -19,16 +20,19 @@ public class Poste{
 
 	
 	@OneToMany(mappedBy = "poste")
-	private Collection<PlanDeCarriere> planDeCarriere =new ArrayList<PlanDeCarriere>();
+	private Collection<AppUser> users =new ArrayList<AppUser>();
 	
+	@ManyToMany
+	private Collection<Competence> competences= new ArrayList<Competence>();
 	
-	public Poste(Long id, String nomPoste,Collection<PlanDeCarriere> planDeCarriere) {
+
+	public Poste(Long id, String nomPoste, Collection<AppUser> users, Collection<Competence> competences) {
 		super();
 		this.id = id;
 		this.nomPoste = nomPoste;
-		this.planDeCarriere = planDeCarriere;
+		this.users = users;
+		this.competences = competences;
 	}
-
 	public Poste() {
 		super();
 	}
@@ -44,13 +48,19 @@ public class Poste{
 	public void setNomPoste(String nomPoste) {
 		this.nomPoste = nomPoste;
 	}
-	public Collection<PlanDeCarriere> getPlanDeCarriere() {
-		return planDeCarriere;
+	public Collection<AppUser> getUsers() {
+		return users;
+	}
+	public void setUsers(Collection<AppUser> users) {
+		this.users = users;
+	}
+	public Collection<Competence> getCompetences() {
+		return competences;
+	}
+	public void setCompetences(Collection<Competence> competences) {
+		this.competences = competences;
 	}
 
-	public void setPlanDeCarriere(Collection<PlanDeCarriere> planDeCarriere) {
-		this.planDeCarriere = planDeCarriere;
-	}
 	
 	
 }

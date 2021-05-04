@@ -19,27 +19,24 @@ public class Competence{
 	private String type;
 	private String nomCompetence;
 	private Boolean evaluation;
-	public String niveau;
+	
 	
 	
 	@OneToMany(mappedBy = "competences")
 	@JsonIgnore
 	private Collection<SousCompetence> sousCompetences =new ArrayList<SousCompetence>();
 	@ManyToOne
-	@JsonIgnore
-	private PlanDeCarriere planDeCarriere;
+	private AppUser rh;
 	
-	
-	public Competence(Long id, String type, String nomCompetence, Boolean evaluation, String niveau,
-			Collection<SousCompetence> sousCompetences, PlanDeCarriere planDeCarriere) {
+	public Competence(Long id, String type, String nomCompetence, Boolean evaluation,
+			Collection<SousCompetence> sousCompetences, AppUser rh) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.nomCompetence = nomCompetence;
 		this.evaluation = evaluation;
-		this.niveau = niveau;
 		this.sousCompetences = sousCompetences;
-		this.planDeCarriere = planDeCarriere;
+		this.rh = rh;
 	}
 	public Competence() {
 		super();
@@ -69,24 +66,20 @@ public class Competence{
 	public void setSousCompetences(Collection<SousCompetence> sousCompetences) {
 		this.sousCompetences = sousCompetences;
 	}
-	public PlanDeCarriere getPlanDeCarriere() {
-		return planDeCarriere;
-	}
-	public void setPlanDeCarriere(PlanDeCarriere planDeCarriere) {
-		this.planDeCarriere = planDeCarriere;
-	}
+
 	public Boolean getEvaluation() {
 		return evaluation;
 	}
 	public void setEvaluation(Boolean evaluation) {
 		this.evaluation = evaluation;
 	}
-	public String getNiveau() {
-		return niveau;
+	public AppUser getRh() {
+		return rh;
 	}
-	public void setNiveau(String niveau) {
-		this.niveau = niveau;
+	public void setRh(AppUser rh) {
+		this.rh = rh;
 	}
+
 	
 	
 }

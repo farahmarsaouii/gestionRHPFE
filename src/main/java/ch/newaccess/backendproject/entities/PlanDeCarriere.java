@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,30 +20,15 @@ public class PlanDeCarriere{
 	@GeneratedValue
 	private Long id;
 	
-	@ManyToOne
+	@OneToOne
 	@JsonIgnore
 	private AppUser emplyee;
 
-	@ManyToOne
-	@JsonIgnore
-	private Poste poste;
-	@OneToMany(mappedBy = "planDeCarriere")
 	
-	private Collection<Competence> competences =new ArrayList<Competence>();
-	
-	
-	public PlanDeCarriere(Long id, Collection<Competence> competences) {
-		super();
-		this.id = id;
-		this.competences = competences;
-	}
-	
-	public PlanDeCarriere(Long id, AppUser emplyee, Poste poste, Collection<Competence> competences) {
+	public PlanDeCarriere(Long id, AppUser emplyee) {
 		super();
 		this.id = id;
 		this.emplyee = emplyee;
-		this.poste = poste;
-		this.competences = competences;
 	}
 
 	public PlanDeCarriere() {
@@ -54,12 +40,6 @@ public class PlanDeCarriere{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Collection<Competence> getCompetences() {
-		return competences;
-	}
-	public void setCompetences(Collection<Competence> competences) {
-		this.competences = competences;
-	}
 
 	public AppUser getEmplyee() {
 		return emplyee;
@@ -68,14 +48,5 @@ public class PlanDeCarriere{
 	public void setEmplyee(AppUser emplyee) {
 		this.emplyee = emplyee;
 	}
-
-	public Poste getPoste() {
-		return poste;
-	}
-
-	public void setPoste(Poste poste) {
-		this.poste = poste;
-	}
-	
 	
 }
