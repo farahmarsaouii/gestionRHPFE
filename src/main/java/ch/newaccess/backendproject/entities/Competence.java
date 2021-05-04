@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -20,11 +21,13 @@ public class Competence{
 	private String nomCompetence;
 	private Boolean evaluation;
 	
-	
+	@ManyToOne
+	private Poste poste;
 	
 	@OneToMany(mappedBy = "competences")
-	@JsonIgnore
+
 	private Collection<SousCompetence> sousCompetences =new ArrayList<SousCompetence>();
+	
 	@ManyToOne
 	private AppUser rh;
 	
@@ -79,6 +82,13 @@ public class Competence{
 	public void setRh(AppUser rh) {
 		this.rh = rh;
 	}
+	public Poste getPoste() {
+		return poste;
+	}
+	public void setPoste(Poste poste) {
+		this.poste = poste;
+	}
+	
 
 	
 	

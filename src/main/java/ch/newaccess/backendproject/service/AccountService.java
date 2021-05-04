@@ -6,6 +6,7 @@ import ch.newaccess.backendproject.entities.AppPrivilege;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Equipe;
+import ch.newaccess.backendproject.entities.Poste;
 
 
 public interface AccountService {
@@ -19,6 +20,7 @@ public interface AccountService {
 	public 	List<AppRole> findRoles();
 
 	public List<AppUser> findByEquipeAndRole(Equipe equipe,AppRole role);
+	public AppUser findByPoste(Poste poste);
 
 
 }

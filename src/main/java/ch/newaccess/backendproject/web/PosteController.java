@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.newaccess.backendproject.entities.Competence;
 import ch.newaccess.backendproject.entities.Poste;
+import ch.newaccess.backendproject.repository.IPosteRepository;
 import ch.newaccess.backendproject.service.IPosteService;
 
 @RestController
@@ -41,4 +43,10 @@ public class PosteController {
 	public Poste updatePoste(@RequestBody Poste d) {
 		return posteService.updatePoste(d);
 	}
+	
+	@GetMapping("/competencePoste")
+	public List<Poste> findCompetencePoste(){
+		return posteService.listePoste();
+	}
+	
 }

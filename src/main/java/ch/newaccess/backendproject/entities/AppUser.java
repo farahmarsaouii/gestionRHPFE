@@ -208,12 +208,7 @@ public Equipe getEquipe() {
 public void setEquipe(Equipe equipe) {
 	this.equipe = equipe;
 }
-public Long getIdSuperieurhierarchique() {
-	return idSuperieurhierarchique;
-}
-public void setIdSuperieurhierarchique(Long idSuperieurhierarchique) {
-	this.idSuperieurhierarchique = idSuperieurhierarchique;
-}
+
 public Poste getPoste() {
 	return poste;
 }

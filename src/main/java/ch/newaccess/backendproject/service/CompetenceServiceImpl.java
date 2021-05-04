@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ch.newaccess.backendproject.entities.Competence;
+import ch.newaccess.backendproject.entities.Poste;
+import ch.newaccess.backendproject.entities.SousCompetence;
 import ch.newaccess.backendproject.repository.ICompetenceRepository;
 
 @Service
@@ -36,6 +38,20 @@ public class CompetenceServiceImpl implements ICompetenceService{
 		competenceRepository.deleteById(idcompetence);
 		
 	}
+
+	@Override
+	public List<Competence> findByPostes(Poste postes) {
+		
+		return competenceRepository.findByPoste(postes);
+	}
+
+	@Override
+	public Competence findById(Long id) {
+		// TODO Auto-generated method stub
+		return competenceRepository.findById(id).get();
+	}
+
+	
 
 
 

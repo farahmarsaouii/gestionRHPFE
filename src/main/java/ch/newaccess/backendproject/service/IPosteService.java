@@ -3,6 +3,7 @@ package ch.newaccess.backendproject.service;
 import java.util.List;
 import java.util.Optional;
 
+import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Poste;
 
 public interface IPosteService {
@@ -11,4 +12,6 @@ public interface IPosteService {
 	public List<Poste> listePoste();
 	public Poste updatePoste(Poste d);
 	public void deletePoste(Long idPoste);
+	public Poste findByUsers(AppUser users);
+	public Poste findById(Long id);
 }

@@ -13,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.newaccess.backendproject.entities.Competence;
 import ch.newaccess.backendproject.entities.SousCompetence;
+import ch.newaccess.backendproject.service.ICompetenceService;
 import ch.newaccess.backendproject.service.ISousCompetenceService;
 
 @RestController
 public class SousCompetenceController {
 	@Autowired
 	public ISousCompetenceService sousCompetenceService;
+	@Autowired
+public ICompetenceService competenceServiceImpl;
+	
 	@GetMapping("/sousCompetence")
 	public Optional<SousCompetence> listDocumentsAdministratif(@RequestParam("sousCompetence-id") Long id){
 		return sousCompetenceService.findSousCompetence(id);
@@ -39,5 +44,11 @@ public class SousCompetenceController {
 	@PutMapping("/updateSousCompetence")
 	public SousCompetence updateSousCompetence(@RequestBody SousCompetence d) {
 		return sousCompetenceService.updateSousCompetence(d);
+	}
+	
+	@GetMapping("/sousCompetencesparCompetence")
+	public List<SousCompetence> getSousCompetencesparCompetence(@RequestParam("idCompetence") Long idCompetence){
+		Competence competence=competenceServiceImpl.findById(idCompetence);
+	return sousCompetenceService.findByCompetences(competence);
 	}
 }

@@ -15,6 +15,7 @@ import ch.newaccess.backendproject.entities.AppPrivilege;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Equipe;
+import ch.newaccess.backendproject.entities.Poste;
 import ch.newaccess.backendproject.repository.PrivilegeRepository;
 import ch.newaccess.backendproject.repository.RoleRespository;
 import ch.newaccess.backendproject.repository.UserRespository;
@@ -90,6 +91,11 @@ return userRespository.findById(id).get();
 
 public 	List<AppRole> findRoles() {
 	return roleRespository.findAll();
+}
+
+@Override
+public AppUser findByPoste(Poste poste) {
+	return userRespository.findByPoste(poste) ;
 }
 
 }

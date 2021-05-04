@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import ch.newaccess.backendproject.entities.Competence;
 import ch.newaccess.backendproject.entities.SousCompetence;
 import ch.newaccess.backendproject.repository.ISousCompetenceRepository;
 @Service
@@ -33,6 +34,12 @@ public ISousCompetenceRepository sousCompetenceRepository;
 	@Override
 	public void deleteSousCompetence(Long idSousCompetence) {
 		sousCompetenceRepository.deleteById(idSousCompetence);
+	}
+
+	@Override
+	public List<SousCompetence> findByCompetences(Competence competences) {
+	
+		return sousCompetenceRepository.findByCompetences(competences);
 	}
 
 }

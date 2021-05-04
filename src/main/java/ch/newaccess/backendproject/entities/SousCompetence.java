@@ -15,6 +15,7 @@ public class SousCompetence{
 	private Long id;
 	private String nomSousCompetence;
 	@ManyToOne
+	@JsonIgnore
 	private Competence competences;
 	
 	@ManyToOne

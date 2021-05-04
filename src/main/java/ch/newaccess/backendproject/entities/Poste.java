@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Poste{
 	@Id	@GeneratedValue
@@ -20,9 +22,11 @@ public class Poste{
 
 	
 	@OneToMany(mappedBy = "poste")
+	@JsonIgnore
 	private Collection<AppUser> users =new ArrayList<AppUser>();
 	
-	@ManyToMany
+	@OneToMany(mappedBy = "poste")
+	@JsonIgnore
 	private Collection<Competence> competences= new ArrayList<Competence>();
 	
 
