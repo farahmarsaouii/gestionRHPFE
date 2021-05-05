@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Competence;
 import ch.newaccess.backendproject.entities.SousCompetence;
 import ch.newaccess.backendproject.repository.ISousCompetenceRepository;
@@ -40,6 +41,12 @@ public ISousCompetenceRepository sousCompetenceRepository;
 	public List<SousCompetence> findByCompetences(Competence competences) {
 	
 		return sousCompetenceRepository.findByCompetences(competences);
+	}
+
+	@Override
+	public List<SousCompetence> findByEmployee(AppUser employee) {
+		// TODO Auto-generated method stub
+		return sousCompetenceRepository.findByEmployee(employee);
 	}
 
 }

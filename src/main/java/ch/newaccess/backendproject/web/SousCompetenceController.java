@@ -1,6 +1,8 @@
 package ch.newaccess.backendproject.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Competence;
 import ch.newaccess.backendproject.entities.SousCompetence;
 import ch.newaccess.backendproject.service.ICompetenceService;
+import ch.newaccess.backendproject.service.IPosteService;
 import ch.newaccess.backendproject.service.ISousCompetenceService;
+import ch.newaccess.backendproject.service.UserDetailsServiceImpl;
 
 @RestController
 public class SousCompetenceController {
@@ -24,6 +29,11 @@ public class SousCompetenceController {
 	public ISousCompetenceService sousCompetenceService;
 	@Autowired
 public ICompetenceService competenceServiceImpl;
+	@Autowired
+	private UserDetailsServiceImpl userService;
+	@Autowired
+	public IPosteService posteServiceImpl;
+	HashMap<Competence, List<SousCompetence>> hashMap = new HashMap<Competence, List<SousCompetence>>();
 	
 	@GetMapping("/sousCompetence")
 	public Optional<SousCompetence> listDocumentsAdministratif(@RequestParam("sousCompetence-id") Long id){
@@ -46,9 +56,38 @@ public ICompetenceService competenceServiceImpl;
 		return sousCompetenceService.updateSousCompetence(d);
 	}
 	
-	@GetMapping("/sousCompetencesparCompetence")
+	/*@GetMapping("/sousCompetencesparCompetence")
 	public List<SousCompetence> getSousCompetencesparCompetence(@RequestParam("idCompetence") Long idCompetence){
 		Competence competence=competenceServiceImpl.findById(idCompetence);
 	return sousCompetenceService.findByCompetences(competence);
+	}*/
+	
+	@GetMapping("/sousCompetencesparUser")
+	public List<SousCompetence> getSousCompetenceParUser(@RequestParam("idUser") Long idUser){
+			System.out.println(idUser);
+			AppUser user=userService.findUserByid(idUser);
+			return sousCompetenceService.findByEmployee(user);
+		
 	}
+	@GetMapping("/getSousCompetenceParCompetenceparUser")
+	public HashMap<Competence, List<SousCompetence>>  getSousCompetenceParCompetenceparUser(@RequestParam("idUser") Long idUser){
+		System.out.print(idUser);
+		System.out.print(userService.findUserByid(idUser));
+		AppUser user=userService.findUserByid(idUser);
+		List<SousCompetence> listcompetencesparsousCompetences = null;
+		
+		List<SousCompetence> listeSousCompetence=sousCompetenceService.findByEmployee(user);
+		List<Competence> competences= competenceServiceImpl.findByPostes(posteServiceImpl.findByUsers(user));
+		
+		for (Competence competence : competences) {
+			for (SousCompetence sousCompetence : listeSousCompetence) {
+				if(competence.getId()==sousCompetence.getCompetences().getId())
+					listcompetencesparsousCompetences.add(sousCompetence);
+			}
+			hashMap.put(competence, listcompetencesparsousCompetences);
+		}
+	
+		return hashMap;
+	}
+	
 }

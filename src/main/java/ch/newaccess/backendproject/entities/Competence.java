@@ -19,7 +19,8 @@ public class Competence{
 	private Long id;
 	private String type;
 	private String nomCompetence;
-	private Boolean evaluation;
+	private String niveau;
+	
 	
 	@ManyToOne
 	private Poste poste;
@@ -31,13 +32,13 @@ public class Competence{
 	@ManyToOne
 	private AppUser rh;
 	
-	public Competence(Long id, String type, String nomCompetence, Boolean evaluation,
+	public Competence(Long id, String type, String nomCompetence,
 			Collection<SousCompetence> sousCompetences, AppUser rh) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.nomCompetence = nomCompetence;
-		this.evaluation = evaluation;
+	
 		this.sousCompetences = sousCompetences;
 		this.rh = rh;
 	}
@@ -70,12 +71,6 @@ public class Competence{
 		this.sousCompetences = sousCompetences;
 	}
 
-	public Boolean getEvaluation() {
-		return evaluation;
-	}
-	public void setEvaluation(Boolean evaluation) {
-		this.evaluation = evaluation;
-	}
 	public AppUser getRh() {
 		return rh;
 	}
@@ -87,6 +82,12 @@ public class Competence{
 	}
 	public void setPoste(Poste poste) {
 		this.poste = poste;
+	}
+	public String getNiveau() {
+		return niveau;
+	}
+	public void setNiveau(String niveau) {
+		this.niveau = niveau;
 	}
 	
 

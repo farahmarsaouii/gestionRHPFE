@@ -14,6 +14,8 @@ public class SousCompetence{
 	@Id	@GeneratedValue
 	private Long id;
 	private String nomSousCompetence;
+	private Boolean evaluation;
+	
 	@ManyToOne
 	@JsonIgnore
 	private Competence competences;
@@ -21,6 +23,8 @@ public class SousCompetence{
 	@ManyToOne
 	private AppUser manager;
 	
+	@ManyToOne
+	private AppUser employee;
 
 	public SousCompetence(Long id, String nomSousCompetence, Competence competences, AppUser manager) {
 		super();
@@ -55,6 +59,18 @@ public class SousCompetence{
 	}
 	public void setManager(AppUser manager) {
 		this.manager = manager;
+	}
+	public AppUser getEmployee() {
+		return employee;
+	}
+	public void setEmployee(AppUser employee) {
+		this.employee = employee;
+	}
+	public Boolean getEvaluation() {
+		return evaluation;
+	}
+	public void setEvaluation(Boolean evaluation) {
+		this.evaluation = evaluation;
 	}
 	
 	

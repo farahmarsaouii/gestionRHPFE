@@ -37,9 +37,6 @@ private AppRole role ;
 @ManyToOne
 private Equipe equipe ;
 
-@ManyToOne
-private Oragnigramme organigramme;
-
 @OneToOne(mappedBy = "emplyee")
 private PlanDeCarriere planDeCarriere;
 
@@ -61,6 +58,10 @@ private Collection<Competence> competence =new ArrayList<Competence>();
 @JsonIgnore
 private Collection<SousCompetence> sousCompetence =new ArrayList<SousCompetence>();
 
+@OneToMany(mappedBy = "employee")
+@JsonIgnore
+private Collection<SousCompetence> sousCompetenceEmployee =new ArrayList<SousCompetence>();
+
 
 public AppUser(Long id, String userName, String password, AppRole role) {
 	super();
@@ -76,14 +77,14 @@ public AppUser(String userName, String password) {
 	this.password = password;
 	
 }
-public AppUser(Long id, String userName, String password, AppRole role, Oragnigramme organigramme,
+public AppUser(Long id, String userName, String password, AppRole role,
 		Collection<DemandeDocument> demandeDocument, Collection<DocumentAdministratif> documentAdministratif) {
 	super();
 	this.id = id;
 	this.userName = userName;
 	this.password = password;
 	this.role = role;
-	this.organigramme = organigramme;
+	
 	this.demandeDocument = demandeDocument;
 	this.documentAdministratif = documentAdministratif;
 	
@@ -93,7 +94,7 @@ public AppUser(Long id, String userName, String password, AppRole role, Oragnigr
 
 
 public AppUser(Long id, String userName, String password, String photo, String email, int cin, String repassword,
-		Long idSuperieurhierarchique, AppRole role, Equipe equipe, Oragnigramme organigramme,
+		Long idSuperieurhierarchique, AppRole role, Equipe equipe,
 		PlanDeCarriere planDeCarriere, Poste poste, Collection<DemandeDocument> demandeDocument,
 		Collection<DocumentAdministratif> documentAdministratif, Collection<Competence> competence,
 		Collection<SousCompetence> sousCompetence) {
@@ -108,7 +109,7 @@ public AppUser(Long id, String userName, String password, String photo, String e
 	this.idSuperieurhierarchique = idSuperieurhierarchique;
 	this.role = role;
 	this.equipe = equipe;
-	this.organigramme = organigramme;
+
 	this.planDeCarriere = planDeCarriere;
 	this.poste = poste;
 	this.demandeDocument = demandeDocument;
@@ -150,12 +151,6 @@ public void setPassword(String password) {
 public AppRole getRole() {
 	return role;
 } 
-public Oragnigramme getOrganigramme() {
-	return organigramme;
-}
-public void setOrganigramme(Oragnigramme organigramme) {
-	this.organigramme = organigramme;
-}
 public Collection<DemandeDocument> getDemandeDocument() {
 	return demandeDocument;
 }
@@ -226,6 +221,12 @@ public Collection<SousCompetence> getSousCompetence() {
 }
 public void setSousCompetence(Collection<SousCompetence> sousCompetence) {
 	this.sousCompetence = sousCompetence;
+}
+public Collection<SousCompetence> getSousCompetenceEmployee() {
+	return sousCompetenceEmployee;
+}
+public void setSousCompetenceEmployee(Collection<SousCompetence> sousCompetenceEmployee) {
+	this.sousCompetenceEmployee = sousCompetenceEmployee;
 }
 
 

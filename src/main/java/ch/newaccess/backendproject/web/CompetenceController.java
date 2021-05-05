@@ -59,6 +59,8 @@ public ICompetenceService competenceServiceImpl;
 		System.out.println("*************"+posteServiceImpl.findByUsers(user));
 		return competenceServiceImpl.findByPostes(posteServiceImpl.findByUsers(user));
 	}
+	
+	
 	@GetMapping("/findCompetencesByPoste")
 	public List<Competence> findByPostes(@RequestParam("poste-id") Long id) {
 		Poste poste=posteServiceImpl.findById(id);
