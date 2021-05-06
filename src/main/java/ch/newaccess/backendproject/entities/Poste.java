@@ -18,6 +18,7 @@ public class Poste{
 	@Id	@GeneratedValue
 	private Long id;
 	private String nomPoste;
+	private String descriptionPoste;
 	
 
 	
@@ -63,6 +64,12 @@ public class Poste{
 	}
 	public void setCompetences(Collection<Competence> competences) {
 		this.competences = competences;
+	}
+	public String getDescriptionPoste() {
+		return descriptionPoste;
+	}
+	public void setDescriptionPoste(String descriptionPoste) {
+		this.descriptionPoste = descriptionPoste;
 	}
 
 	

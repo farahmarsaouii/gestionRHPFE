@@ -121,5 +121,5 @@ public class SousCompetenceController {
 	// ken mouch romdhane rani 9olt haja okhra ama madnheb dodo
 	// hayya hassiou douce nuit ghodwa chouf w 9olli c bn ou nn esmaa amanaman 9oli chaamlt b dhabtt fi msg vocal
 	// behy mela lahdha matsakkarch el pc bch yabda el code 9oddemi si nn nensa behiii
-	hayya barra or9ed aychek aychekk aychek rabbi yraychek :phhhhhhhhhyya ena hani khrajt bye byee 
+	//hayya barra or9ed aychek aychekk aychek rabbi yraychek :phhhhhhhhhyya ena hani khrajt bye byee 
 }
