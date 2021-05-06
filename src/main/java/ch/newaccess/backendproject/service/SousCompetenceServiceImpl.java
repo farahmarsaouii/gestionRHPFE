@@ -3,6 +3,7 @@ package ch.newaccess.backendproject.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ch.newaccess.backendproject.entities.AppUser;
@@ -11,6 +12,7 @@ import ch.newaccess.backendproject.entities.SousCompetence;
 import ch.newaccess.backendproject.repository.ISousCompetenceRepository;
 @Service
 public class SousCompetenceServiceImpl implements ISousCompetenceService{
+	@Autowired
 public ISousCompetenceRepository sousCompetenceRepository;
 	@Override
 	public Optional<SousCompetence> findSousCompetence(Long idSousCompetence) {
@@ -44,9 +46,9 @@ public ISousCompetenceRepository sousCompetenceRepository;
 	}
 
 	@Override
-	public List<SousCompetence> findByEmployee(AppUser employee) {
+	public List<SousCompetence> findByEmployee(Long employeeId) {
 		// TODO Auto-generated method stub
-		return sousCompetenceRepository.findByEmployee(employee);
+		return sousCompetenceRepository.findByEmployeeId(employeeId);
 	}
 
 }

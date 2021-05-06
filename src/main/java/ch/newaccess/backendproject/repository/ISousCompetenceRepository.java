@@ -13,4 +13,5 @@ import ch.newaccess.backendproject.entities.SousCompetence;
 public interface ISousCompetenceRepository extends JpaRepository<SousCompetence,Long> {
 public List<SousCompetence> findByCompetences(Competence competences);
 public List<SousCompetence> findByEmployee(AppUser employee);
+List<SousCompetence> findByEmployeeId(Long employeeId);
 }

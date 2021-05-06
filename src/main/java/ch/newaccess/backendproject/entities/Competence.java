@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-public class Competence{
+public class Competence implements Serializable{
 	@Id	@GeneratedValue
 	private Long id;
 	private String type;
@@ -88,6 +88,17 @@ public class Competence{
 	}
 	public void setNiveau(String niveau) {
 		this.niveau = niveau;
+	}
+	public Competence(Long id, String type, String nomCompetence, String niveau, Poste poste,
+			Collection<SousCompetence> sousCompetences, AppUser rh) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.nomCompetence = nomCompetence;
+		this.niveau = niveau;
+		this.poste = poste;
+		this.sousCompetences = sousCompetences;
+		this.rh = rh;
 	}
 	
 

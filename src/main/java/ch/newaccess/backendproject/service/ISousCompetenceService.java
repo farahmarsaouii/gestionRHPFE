@@ -14,5 +14,5 @@ public interface ISousCompetenceService {
 	public SousCompetence updateSousCompetence(SousCompetence d);
 	public void deleteSousCompetence(Long idSousCompetence);
 	public List<SousCompetence> findByCompetences(Competence competences);
-	public List<SousCompetence> findByEmployee(AppUser employee);
+	public List<SousCompetence> findByEmployee(Long employeeId);
 }
