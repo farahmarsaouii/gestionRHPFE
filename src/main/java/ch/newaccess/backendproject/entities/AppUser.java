@@ -30,6 +30,7 @@ private Long id;
 	private String email;
 	private int cin;
 	private String repassword;
+	private String fileName;
 	private AppUser idSuperieurhierarchique;
 	
 @ManyToOne
@@ -257,6 +258,12 @@ public Collection<SousCompetence> getSousCompetenceEmployee() {
 }
 public void setSousCompetenceEmployee(Collection<SousCompetence> sousCompetenceEmployee) {
 	this.sousCompetenceEmployee = sousCompetenceEmployee;
+}
+public String getFileName() {
+	return fileName;
+}
+public void setFileName(String fileName) {
+	this.fileName = fileName;
 }
 
 

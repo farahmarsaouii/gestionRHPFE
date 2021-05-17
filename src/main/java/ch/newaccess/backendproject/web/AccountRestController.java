@@ -1,8 +1,28 @@
 package ch.newaccess.backendproject.web;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
+import java.awt.PageAttributes.MediaType;
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
 
+import java.util.Map;
+import java.util.Optional;
+//import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FilenameUtils;
+import javax.servlet.ServletContext;
+//import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParseException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +32,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import ch.newaccess.backendproject.domaine.Response;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Competence;
@@ -34,17 +59,19 @@ public class AccountRestController {
 	private IEquipeRepository equipeRespository;
 	@Autowired
 	private AccountService accountService;
+	@Autowired  ServletContext context;
+	
 	@PostMapping("/register")
-public AppUser register(@RequestBody AppUser userForm) {
-	
-		if(!userForm.getPassword().equals(userForm.getRepassword())) throw new RuntimeException("you must confirm your password");
+//public ResponseEntity<Response> register(@RequestParam("user") String user,@RequestParam("file") MultipartFile file)throws JsonParseException , JsonMappingException , Exception{
+		public AppUser register(@RequestBody AppUser userForm){	
+		/*if(!userForm.getPassword().equals(userForm.getRepassword())) throw new RuntimeException("you must confirm your password");
 		AppUser user=accountService.findUserByUsername(userForm.getUserName());
-		if(user!=null) throw new RuntimeException("this user already exists");
+		if(user!=null) throw new RuntimeException("this user already exists");*/
 		
 	
 		
 		
-		//AppRole r=new AppRole();
+		
 		AppUser appUser =new AppUser();
 		appUser.setUserName(userForm.getUserName());
 		appUser.setPoste(userForm.getPoste());
@@ -57,9 +84,39 @@ public AppUser register(@RequestBody AppUser userForm) {
 		System.out.println(appUser.getRole());
 accountService.saveUser(appUser);
 
-//accountService.affectRoleToUser(userForm.getUserName(), "USER");
-//accountService.addPrivilegeToRole("accessToData", "USER");
-//accountService.addPrivilegeToRole("updateData", "USER");
+
+	/*	System.out.println("Ok .............");
+		AppUser utilisateur = new ObjectMapper().readValue(user, AppUser.class);
+        boolean isExit = new File(context.getRealPath("/Images/")).exists();
+        if (!isExit)
+        {
+        	new File (context.getRealPath("/Images/")).mkdir();
+        	System.out.println("mk dir.............");
+        }
+        String filename = file.getOriginalFilename();
+        String newFileName = FilenameUtils.getBaseName(filename)+"."+FilenameUtils.getExtension(filename);
+        File serverFile = new File (context.getRealPath("/Images/"+File.separator+newFileName));
+        try
+        {
+        	System.out.println("Image");
+        	 FileUtils.writeByteArrayToFile(serverFile,file.getBytes());
+        	 
+        }catch(Exception e) {
+        	e.printStackTrace();
+        }
+
+       
+        utilisateur.setFileName(newFileName);
+        AppUser u = accountService.saveUser(utilisateur);
+        if (u != null)
+        {
+        	
+        return	new ResponseEntity<Response>(new Response(), HttpStatus.OK);
+        }
+        else
+        {
+        	return new ResponseEntity<Response>(new Response("Article not saved"),HttpStatus.BAD_REQUEST);	
+        }*/
 
 
 return appUser;

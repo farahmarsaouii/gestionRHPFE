@@ -21,7 +21,7 @@ public class AppRole{
 	@Id @GeneratedValue
 	private Long id;
 	private String role;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	 
 	private Collection<AppPrivilege> privileges =new ArrayList<AppPrivilege>();
 	@OneToMany(mappedBy = "role")
