@@ -47,6 +47,11 @@ private AccountService accountService;
 		return accountService.findUserByUsername(userName);
 	}
 	
+	public List<AppUser> findUsers() {
+		return accountService.findUsers();
+	}
+	
+	
 	public AppUser findUserByid(Long id) {
 		System.out.print("hello heloooooo");
 		return accountService.findUserByid(id);
@@ -56,6 +61,15 @@ private AccountService accountService;
 		// TODO Auto-generated method stub
 		return accountService.findByEquipeAndRole(equipe,role) ;
 	}
+	public AppUser updateUser(AppUser user) {
+		// TODO Auto-generated method stub
+		return accountService.updateUser(user);
+	}
 
+	
+	public void deleteUserById(Long idUser) {
+		accountService.deleteUser(idUser);
+		
+	}
 }
 

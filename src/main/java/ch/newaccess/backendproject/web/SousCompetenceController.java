@@ -85,12 +85,16 @@ public class SousCompetenceController {
 			@RequestParam("idUser") Long idUser) {
 		System.out.print(idUser);
 //		System.out.print(userService.findUserByid(idUser));
-//		AppUser user = userService.findUserByid(idUser);
+		AppUser user = userService.findUserByid(idUser);
 
 		listeSousCompetence = sousCompetenceService.findByEmployee(idUser);
-//		List<Competence> competences = competenceServiceImpl.findByPostes(posteServiceImpl.findByUsers(user));
+		List<Competence> competences = competenceServiceImpl.findByPostes(posteServiceImpl.findByUsers(user));
+		if(competences != null && competences.size()>0) {
+			
+		}
 		Map<Competence, List<SousCompetence>> hashMap = new HashMap<Competence, List<SousCompetence>>();
 		Map<String, List<CompetenceDto>> hashMap2 = new HashMap<String, List<CompetenceDto>>();
+		
 		for (SousCompetence sousCompetence : listeSousCompetence) {
 			if (hashMap.get(sousCompetence.getCompetences()) == null) {
 				List<SousCompetence> listcompetencesparsousCompetences = new ArrayList<SousCompetence>();

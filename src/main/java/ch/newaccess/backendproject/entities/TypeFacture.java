@@ -10,12 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class TypeFacture{
 	@Id	@GeneratedValue
 	private Long id;
 	private String nomTypeFacture;
 	@OneToMany(mappedBy = "typeFacture")
+	@JsonIgnore
 	private Collection<Facture> factures =new ArrayList<Facture>();
 	public TypeFacture(Long id, String nomTypeFacture, Collection<Facture> factures) {
 		super();

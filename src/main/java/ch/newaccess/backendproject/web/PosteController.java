@@ -40,8 +40,8 @@ public class PosteController {
 		posteService.deletePoste(id);
 	}
 	@PutMapping("/updatePoste")
-	public Poste updatePoste(@RequestBody Poste d) {
-		return posteService.updatePoste(d);
+	public Poste updatePoste(@RequestBody Poste p) {
+		return posteService.updatePoste(p);
 	}
 	
 	@GetMapping("/competencePoste")

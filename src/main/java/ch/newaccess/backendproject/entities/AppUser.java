@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class AppUser implements Serializable{
@@ -29,7 +30,7 @@ private Long id;
 	private String email;
 	private int cin;
 	private String repassword;
-	private Long idSuperieurhierarchique;
+	private AppUser idSuperieurhierarchique;
 	
 @ManyToOne
 private AppRole role ;
@@ -94,7 +95,31 @@ public AppUser(Long id, String userName, String password, AppRole role,
 
 
 public AppUser(Long id, String userName, String password, String photo, String email, int cin, String repassword,
-		Long idSuperieurhierarchique, AppRole role, Equipe equipe,
+		AppUser idSuperieurhierarchique, AppRole role, Equipe equipe, PlanDeCarriere planDeCarriere, Poste poste,
+		Collection<DemandeDocument> demandeDocument, Collection<DocumentAdministratif> documentAdministratif,
+		Collection<Competence> competence, Collection<SousCompetence> sousCompetence,
+		Collection<SousCompetence> sousCompetenceEmployee) {
+	super();
+	this.id = id;
+	this.userName = userName;
+	this.password = password;
+	this.photo = photo;
+	this.email = email;
+	this.cin = cin;
+	this.repassword = repassword;
+	this.idSuperieurhierarchique = idSuperieurhierarchique;
+	this.role = role;
+	this.equipe = equipe;
+	this.planDeCarriere = planDeCarriere;
+	this.poste = poste;
+	this.demandeDocument = demandeDocument;
+	this.documentAdministratif = documentAdministratif;
+	this.competence = competence;
+	this.sousCompetence = sousCompetence;
+	this.sousCompetenceEmployee = sousCompetenceEmployee;
+}
+public AppUser(Long id, String userName, String password, String photo, String email, int cin, String repassword,
+		AppUser idSuperieurhierarchique, AppRole role, Equipe equipe,
 		PlanDeCarriere planDeCarriere, Poste poste, Collection<DemandeDocument> demandeDocument,
 		Collection<DocumentAdministratif> documentAdministratif, Collection<Competence> competence,
 		Collection<SousCompetence> sousCompetence) {
@@ -191,14 +216,19 @@ public PlanDeCarriere getPlanDeCarriere() {
 public void setPlanDeCarriere(PlanDeCarriere planDeCarriere) {
 	this.planDeCarriere = planDeCarriere;
 }
-public Long getIdSuperieurhierarchique() {
-	return idSuperieurhierarchique;
-}
-public void setIdSuperieurhierarchique(Long idSuperieurhierarchique) {
-	this.idSuperieurhierarchique = idSuperieurhierarchique;
-}
+
+
 public Equipe getEquipe() {
 	return equipe;
+}
+@JsonIgnore
+@JsonProperty("idSuperieurhierarchique") 
+public AppUser getIdSuperieurhierarchique() {
+	return idSuperieurhierarchique;
+}
+
+public void setIdSuperieurhierarchique(AppUser idSuperieurhierarchique) {
+	this.idSuperieurhierarchique = idSuperieurhierarchique;
 }
 public void setEquipe(Equipe equipe) {
 	this.equipe = equipe;

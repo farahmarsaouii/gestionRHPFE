@@ -12,15 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class AppRole{
 	@Id @GeneratedValue
 	private Long id;
 	private String role;
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JsonIgnore
+	@ManyToMany
+	 
 	private Collection<AppPrivilege> privileges =new ArrayList<AppPrivilege>();
 	@OneToMany(mappedBy = "role")
 	@JsonIgnore
@@ -51,6 +53,21 @@ public class AppRole{
 	}
 	public AppRole() {
 		super();
+	}
+	@JsonIgnore
+	@JsonProperty("privileges") 
+	public Collection<AppPrivilege> getPrivileges() {
+		return privileges;
+	}
+	@JsonIgnore
+	public void setPrivileges(Collection<AppPrivilege> privileges) {
+		this.privileges = privileges;
+	}
+	public Collection<AppUser> getUsers() {
+		return users;
+	}
+	public void setUsers(Collection<AppUser> users) {
+		this.users = users;
 	}
 	
 	

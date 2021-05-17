@@ -17,6 +17,7 @@ import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Competence;
 import ch.newaccess.backendproject.entities.DocumentAdministratif;
 import ch.newaccess.backendproject.entities.Poste;
+import ch.newaccess.backendproject.entities.TypeFacture;
 import ch.newaccess.backendproject.service.ICompetenceService;
 import ch.newaccess.backendproject.service.IPosteService;
 import ch.newaccess.backendproject.service.UserDetailsServiceImpl;
@@ -39,6 +40,12 @@ public ICompetenceService competenceServiceImpl;
 	public List<Competence> listerCompetence(){
 		return competenceServiceImpl.listeCompetence();
 	}
+	
+	@GetMapping("/competenceById")
+	public Competence getCompetenceByIdCompetence(@RequestParam("competence-id") Long id){
+		return competenceServiceImpl.findById(id);
+	}
+	
 	@DeleteMapping("/removeCompetence/{competence-id}")
 	public void deleteCompetence(@PathVariable("competence-id") Long id){
 		competenceServiceImpl.deleteCompetence(id);

@@ -2,6 +2,7 @@ package ch.newaccess.backendproject.service;
 
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ch.newaccess.backendproject.entities.AppPrivilege;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
+import ch.newaccess.backendproject.entities.DocumentAdministratif;
 import ch.newaccess.backendproject.entities.Equipe;
 import ch.newaccess.backendproject.entities.Poste;
 import ch.newaccess.backendproject.repository.PrivilegeRepository;
@@ -96,6 +98,31 @@ public 	List<AppRole> findRoles() {
 @Override
 public AppUser findByPoste(Poste poste) {
 	return userRespository.findByPoste(poste) ;
+}
+
+@Override
+public List<AppUser> findUsers() {
+	// TODO Auto-generated method stub
+	return userRespository.findAll();
+}
+
+@Override
+public AppUser updateUser(AppUser user) {
+	AppUser u= userRespository.findById(user.getId()).get();
+	u.setUserName(user.getUserName());
+	u.setCin(user.getCin());
+	u.setEmail(user.getEmail());
+	u.setEquipe(user.getEquipe());
+	u.setIdSuperieurhierarchique(user.getIdSuperieurhierarchique());
+	u.setPoste(u.getPoste());
+	u.setRole(u.getRole());
+	return userRespository.save(u);
+}
+
+@Override
+public void deleteUser(Long idUser) {
+	userRespository.deleteById(idUser);
+	
 }
 
 }

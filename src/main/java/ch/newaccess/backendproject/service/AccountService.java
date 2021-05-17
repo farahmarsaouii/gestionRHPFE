@@ -17,7 +17,10 @@ public interface AccountService {
 	public void addPrivilegeToRole(String privilegeName,String roleName);
 	public AppUser findUserByUsername(String userName);
 	public AppUser findUserByid(Long id);
+	public List<AppUser> findUsers();
 	public 	List<AppRole> findRoles();
+	public AppUser updateUser(AppUser user);
+	public void deleteUser(Long idUser);
 
 	public List<AppUser> findByEquipeAndRole(Equipe equipe,AppRole role);
 	public AppUser findByPoste(Poste poste);

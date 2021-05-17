@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
@@ -17,7 +18,6 @@ public class Equipe {
 	private Long id;
 	private String nomEquipe;
 	@OneToMany(mappedBy = "equipe")
-	@JsonIgnore
 	private Collection<AppUser> users =new ArrayList<AppUser>();
 	public Equipe() {
 		super();
@@ -40,6 +40,8 @@ public class Equipe {
 	public void setNomEquipe(String nomEquipe) {
 		this.nomEquipe = nomEquipe;
 	}
+	@JsonIgnore
+	@JsonProperty("users") 
 	public Collection<AppUser> getUsers() {
 		return users;
 	}

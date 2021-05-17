@@ -71,6 +71,15 @@ public class Poste{
 	public void setDescriptionPoste(String descriptionPoste) {
 		this.descriptionPoste = descriptionPoste;
 	}
+	public Poste(Long id, String nomPoste, String descriptionPoste, Collection<AppUser> users,
+			Collection<Competence> competences) {
+		super();
+		this.id = id;
+		this.nomPoste = nomPoste;
+		this.descriptionPoste = descriptionPoste;
+		this.users = users;
+		this.competences = competences;
+	}
 
 	
 	

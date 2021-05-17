@@ -1,31 +1,21 @@
 package ch.newaccess.backendproject.entities;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-@Entity
-public class AppPrivilege{
-	@Id @GeneratedValue
+
+public class AppPrivilegeDto{
+
 	private Long id;
 	private String privilege;
-	@ManyToMany
-	@JsonIgnore
+
 	private Collection<AppRole> roles =new ArrayList<AppRole>();
-	public AppPrivilege() {
+	public AppPrivilegeDto() {
 		super();
 	
 	}
 	
-	public AppPrivilege(Long id, String privilege) {
+	public AppPrivilegeDto(Long id, String privilege) {
 		super();
 		this.id = id;
 		this.privilege = privilege;

@@ -30,8 +30,11 @@ public IPosteRepository posteRepository;
 	}
 
 	@Override
-	public Poste updatePoste(Poste d) {
-		return posteRepository.save(d);
+	public Poste updatePoste(Poste poste) {
+		Poste p= posteRepository.findById(poste.getId()).get();
+		p.setNomPoste(poste.getNomPoste());
+		p.setDescriptionPoste(poste.getDescriptionPoste());
+		return posteRepository.save(p);
 	}
 
 	@Override
