@@ -1,6 +1,7 @@
 package ch.newaccess.backendproject.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import ch.newaccess.backendproject.entities.AppPrivilege;
 import ch.newaccess.backendproject.entities.AppPrivilegeDto;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppRoleDto;
+import ch.newaccess.backendproject.entities.DocumentAdministratif;
 import ch.newaccess.backendproject.repository.RoleRespository;
 @Service
 public class RoleServiceImpl implements IRoleService{
@@ -75,8 +77,10 @@ public List<AppRole> listeRole() {
 
 @Override
 public AppRole updateRole(AppRole role) {
-	// TODO Auto-generated method stub
-	return null;
+	AppRole r=roleRespository.findById(role.getId()).get();
+	r.setprivileges(role.getprivileges());
+	r.setRole(role.getRole());
+	return roleRespository.save(r);
 }
 
 

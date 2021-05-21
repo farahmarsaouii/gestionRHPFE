@@ -63,7 +63,7 @@ public class AccountRestController {
 	
 	@PostMapping("/register")
 //public ResponseEntity<Response> register(@RequestParam("user") String user,@RequestParam("file") MultipartFile file)throws JsonParseException , JsonMappingException , Exception{
-		public AppUser register(@RequestBody AppUser userForm){	
+	public AppUser register(@RequestBody AppUser userForm){	
 		/*if(!userForm.getPassword().equals(userForm.getRepassword())) throw new RuntimeException("you must confirm your password");
 		AppUser user=accountService.findUserByUsername(userForm.getUserName());
 		if(user!=null) throw new RuntimeException("this user already exists");*/
@@ -84,8 +84,8 @@ public class AccountRestController {
 		System.out.println(appUser.getRole());
 accountService.saveUser(appUser);
 
-
-	/*	System.out.println("Ok .............");
+/*
+		System.out.println("Ok .............");
 		AppUser utilisateur = new ObjectMapper().readValue(user, AppUser.class);
         boolean isExit = new File(context.getRealPath("/Images/")).exists();
         if (!isExit)
@@ -116,8 +116,8 @@ accountService.saveUser(appUser);
         else
         {
         	return new ResponseEntity<Response>(new Response("Article not saved"),HttpStatus.BAD_REQUEST);	
-        }*/
-
+        }
+*/
 
 return appUser;
 }
