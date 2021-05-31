@@ -102,7 +102,6 @@ public AppUser findByPoste(Poste poste) {
 
 @Override
 public List<AppUser> findUsers() {
-	// TODO Auto-generated method stub
 	return userRespository.findAll();
 }
 
@@ -124,5 +123,7 @@ public void deleteUser(Long idUser) {
 	userRespository.deleteById(idUser);
 	
 }
-
+public List<AppUser> findByRole(AppRole role){
+	return userRespository.findByRole(role);
+};
 }

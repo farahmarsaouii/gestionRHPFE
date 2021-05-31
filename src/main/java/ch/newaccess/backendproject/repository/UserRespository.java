@@ -14,4 +14,5 @@ public interface UserRespository extends JpaRepository<AppUser,Long> {
 	public AppUser findByUserName(String userName);
 	public List<AppUser> findByEquipeAndRole(Equipe equipe,AppRole role);
 	public AppUser findByPoste(Poste poste);
+	public List<AppUser> findByRole(AppRole role);
 }

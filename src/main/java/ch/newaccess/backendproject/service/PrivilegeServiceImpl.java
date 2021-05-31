@@ -20,7 +20,7 @@ public class PrivilegeServiceImpl implements IPrivilegeService{
 	@Override
 	public AppPrivilege findPrivilegeById(Long idPrivilege) {
 		// TODO Auto-generated method stub
-		return null;
+		return privilegeRepository.findById(idPrivilege).get();
 	}
 
 	@Override

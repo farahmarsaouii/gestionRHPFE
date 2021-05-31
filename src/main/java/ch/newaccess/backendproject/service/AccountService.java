@@ -24,6 +24,6 @@ public interface AccountService {
 
 	public List<AppUser> findByEquipeAndRole(Equipe equipe,AppRole role);
 	public AppUser findByPoste(Poste poste);
-
+	public List<AppUser> findByRole(AppRole role);
 
 }

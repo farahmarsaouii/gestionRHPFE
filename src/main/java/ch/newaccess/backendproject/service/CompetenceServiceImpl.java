@@ -30,6 +30,7 @@ public class CompetenceServiceImpl implements ICompetenceService{
 
 	@Override
 	public Competence updateCompetence(Competence c) {
+		
 		return competenceRepository.save(c);
 	}
 

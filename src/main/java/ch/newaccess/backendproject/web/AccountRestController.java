@@ -5,14 +5,21 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.awt.PageAttributes.MediaType;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
-
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
+
 //import org.apache.commons.io.FileUtils;
 //import org.apache.commons.io.FilenameUtils;
 import javax.servlet.ServletContext;
@@ -38,19 +45,27 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.newaccess.backendproject.domaine.Response;
+import ch.newaccess.backendproject.entities.AppPrivilege;
 import ch.newaccess.backendproject.entities.AppRole;
 import ch.newaccess.backendproject.entities.AppUser;
+import ch.newaccess.backendproject.entities.AppUserDto;
 import ch.newaccess.backendproject.entities.Competence;
 import ch.newaccess.backendproject.entities.Equipe;
+import ch.newaccess.backendproject.entities.ImageModel;
 import ch.newaccess.backendproject.entities.Poste;
 import ch.newaccess.backendproject.entities.RegisterForm;
+import ch.newaccess.backendproject.entities.SousCompetence;
 import ch.newaccess.backendproject.repository.IEquipeRepository;
+import ch.newaccess.backendproject.repository.IimageRepository;
 import ch.newaccess.backendproject.repository.RoleRespository;
 import ch.newaccess.backendproject.service.AccountService;
+import ch.newaccess.backendproject.service.IPrivilegeService;
 import ch.newaccess.backendproject.service.UserDetailsServiceImpl;
 
 @RestController
 public class AccountRestController {
+	@Autowired
+	IPrivilegeService privilegeService;
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
 	@Autowired
@@ -60,17 +75,24 @@ public class AccountRestController {
 	@Autowired
 	private AccountService accountService;
 	@Autowired  ServletContext context;
+	List<AppUser> listeusers= new ArrayList<AppUser>();
+	 List<AppUser> listef ;
 	
+	
+	
+	 
 	@PostMapping("/register")
-//public ResponseEntity<Response> register(@RequestParam("user") String user,@RequestParam("file") MultipartFile file)throws JsonParseException , JsonMappingException , Exception{
+//public AppUser register(@RequestParam("user") String username,@RequestParam("imageFile") MultipartFile file)throws JsonParseException , JsonMappingException , Exception{
 	public AppUser register(@RequestBody AppUser userForm){	
 		/*if(!userForm.getPassword().equals(userForm.getRepassword())) throw new RuntimeException("you must confirm your password");
 		AppUser user=accountService.findUserByUsername(userForm.getUserName());
 		if(user!=null) throw new RuntimeException("this user already exists");*/
 		
-	
-		
-		
+		/*ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),compressBytes(file.getBytes()),user);
+		imageRepository.save(img);
+		AppUser appUser =new AppUser();
+        appUser=user;
+        accountService.saveUser(appUser);*/
 		
 		AppUser appUser =new AppUser();
 		appUser.setUserName(userForm.getUserName());
@@ -131,6 +153,33 @@ return appUser;
 	public List<AppUser> getUsers(){
 		return userDetailsService.findUsers();	
      }
+
+	@GetMapping("/usersChart")
+	public List<AppUserDto> getOrganigramUsers(){
+		 List<AppUserDto> listeUsersDto =new ArrayList<AppUserDto>();
+		 for(AppUser user :userDetailsService.findUsers()) {
+			 
+		AppUserDto	userDto=new AppUserDto();
+		if(user.getId().equals(user.getIdSuperieurhierarchique().getId())) {
+			 userDto.setId(user.getId());
+			 userDto.setName(user.getUserName());
+			 userDto.setTitle(user.getPoste().getNomPoste());
+			// userDto.setImg(null);
+		}else {
+				 userDto.setId(user.getId());
+				 userDto.setName(user.getUserName());
+				 userDto.setPid(user.getIdSuperieurhierarchique().getId());
+				 userDto.setTitle(user.getPoste().getNomPoste());
+				// userDto.setImg(null);}
+				
+				 
+				
+			 
+		 }
+		 listeUsersDto.add(userDto);
+		 
+     }
+		 return listeUsersDto;}
 	
 	@GetMapping("/getUserById")
 	public AppUser getUser(@RequestParam("user-id") Long idUser){
@@ -148,15 +197,34 @@ return appUser;
 	
 	@GetMapping("/getByEquipeAndRole")
 	public List<AppUser> getByEquipeAndRole(@RequestParam("idequipe") Long idequipe){
-		AppRole role = roleRespository.findByrole("USER");
+		AppRole role = roleRespository.findByrole("employeeRole");
 	Equipe equipe = equipeRespository.findById(idequipe).get();
 		
 		return accountService.findByEquipeAndRole(equipe, role);
 		
 	
 }
+	
+	@GetMapping("/getByPrivilege")
+	public List<AppUser> getuserByPrivilege(){
+		AppPrivilege p=privilegeService.findPrivilegeById(2L);
+		List<AppRole> roles = roleRespository.findByPrivileges(p);		
+		System.out.println(roles.size()+"****////////***");
+		for(AppRole r :roles) {
+	List<AppUser> users =accountService.findByRole(r);	
+	 listeusers.addAll(users);
+	 Set<AppUser> mySet = new HashSet<AppUser>(listeusers);
+
+	   listef = new ArrayList<AppUser>(mySet);
+		}
+		return listef;
+	}
+	
+	
 	@GetMapping("/getRoles")
 	public List<AppRole> findRoles(){
 		return accountService.findRoles() ;}
+	
+	
 	
 }

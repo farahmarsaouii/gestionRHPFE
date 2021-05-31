@@ -1,6 +1,7 @@
 package ch.newaccess.backendproject.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,15 +10,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class SousCompetence{
 	@Id	@GeneratedValue
 	private Long id;
 	private String nomSousCompetence;
 	private Boolean evaluation;
-	
+	private String commentaireSC;
+	private Date dateSC;
 	@ManyToOne
-	@JsonIgnore
+
 	private Competence competences;
 	
 	@ManyToOne
@@ -48,6 +51,8 @@ public class SousCompetence{
 	public void setNomSousCompetence(String nomSousCompetence) {
 		this.nomSousCompetence = nomSousCompetence;
 	}
+	@JsonIgnore
+	@JsonProperty("competences") 
 	public Competence getCompetences() {
 		return competences;
 	}
@@ -71,6 +76,18 @@ public class SousCompetence{
 	}
 	public void setEvaluation(Boolean evaluation) {
 		this.evaluation = evaluation;
+	}
+	public String getCommentaireSC() {
+		return commentaireSC;
+	}
+	public void setCommentaireSC(String commentaireSC) {
+		this.commentaireSC = commentaireSC;
+	}
+	public Date getDateSC() {
+		return dateSC;
+	}
+	public void setDateSC(Date dateSC) {
+		this.dateSC = dateSC;
 	}
 	
 	

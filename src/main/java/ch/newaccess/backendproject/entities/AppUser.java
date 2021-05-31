@@ -4,24 +4,29 @@ package ch.newaccess.backendproject.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 
 import javax.persistence.Id;
-
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class AppUser implements Serializable{
 	@Id @GeneratedValue
+
 private Long id;
 	@Column(unique = true)
 	private String userName;
@@ -31,8 +36,22 @@ private Long id;
 	private int cin;
 	private String repassword;
 	private String fileName;
+	@ManyToOne
 	private AppUser idSuperieurhierarchique;
+	@OneToMany(mappedBy = "idSuperieurhierarchique")
+   private List<AppUser> employees;
+
 	
+	@OneToOne(mappedBy = "user")
+	private ImageModel image ;
+	
+	@ManyToMany
+	@JsonIgnore
+	private Collection<Notification> notificationDestinataire =new ArrayList<Notification>();
+	
+			@OneToMany(mappedBy = "expediteur")
+	@JsonIgnore
+	private Collection<Notification> notificationExpediteur =new ArrayList<Notification>();
 @ManyToOne
 private AppRole role ;
 
@@ -264,6 +283,32 @@ public String getFileName() {
 }
 public void setFileName(String fileName) {
 	this.fileName = fileName;
+}
+@JsonIgnore
+@JsonProperty("employees") 
+public List<AppUser> getEmployees() {
+	return employees;
+}
+public void setEmployees(List<AppUser> employees) {
+	this.employees = employees;
+}
+public ImageModel getImage() {
+	return image;
+}
+public void setImage(ImageModel image) {
+	this.image = image;
+}
+public Collection<Notification> getNotificationDestinataire() {
+	return notificationDestinataire;
+}
+public void setNotificationDestinataire(Collection<Notification> notificationDestinataire) {
+	this.notificationDestinataire = notificationDestinataire;
+}
+public Collection<Notification> getNotificationExpediteur() {
+	return notificationExpediteur;
+}
+public void setNotificationExpediteur(Collection<Notification> notificationExpediteur) {
+	this.notificationExpediteur = notificationExpediteur;
 }
 
 

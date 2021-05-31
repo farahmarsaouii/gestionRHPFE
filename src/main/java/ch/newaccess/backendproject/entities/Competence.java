@@ -3,6 +3,7 @@ package ch.newaccess.backendproject.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ public class Competence implements Serializable{
 	private Long id;
 	private String type;
 	private String nomCompetence;
-	private String niveau;
+	private Date dateModif;
 	
 	
 	@ManyToOne
@@ -83,19 +84,19 @@ public class Competence implements Serializable{
 	public void setPoste(Poste poste) {
 		this.poste = poste;
 	}
-	public String getNiveau() {
-		return niveau;
+	
+	public Date getDateModif() {
+		return dateModif;
 	}
-	public void setNiveau(String niveau) {
-		this.niveau = niveau;
+	public void setDateModif(Date dateModif) {
+		this.dateModif = dateModif;
 	}
-	public Competence(Long id, String type, String nomCompetence, String niveau, Poste poste,
+	public Competence(Long id, String type, String nomCompetence, Poste poste,
 			Collection<SousCompetence> sousCompetences, AppUser rh) {
 		super();
 		this.id = id;
 		this.type = type;
-		this.nomCompetence = nomCompetence;
-		this.niveau = niveau;
+		this.nomCompetence = nomCompetence;	
 		this.poste = poste;
 		this.sousCompetences = sousCompetences;
 		this.rh = rh;

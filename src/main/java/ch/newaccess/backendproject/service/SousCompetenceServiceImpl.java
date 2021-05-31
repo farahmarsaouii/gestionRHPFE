@@ -1,5 +1,6 @@
 package ch.newaccess.backendproject.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import ch.newaccess.backendproject.entities.AppUser;
 import ch.newaccess.backendproject.entities.Competence;
+import ch.newaccess.backendproject.entities.DocumentAdministratif;
 import ch.newaccess.backendproject.entities.SousCompetence;
 import ch.newaccess.backendproject.repository.ISousCompetenceRepository;
 @Service
@@ -31,7 +33,16 @@ public ISousCompetenceRepository sousCompetenceRepository;
 
 	@Override
 	public SousCompetence updateSousCompetence(SousCompetence d) {
-		return sousCompetenceRepository.save(d);
+		SousCompetence sc=sousCompetenceRepository.findById(d.getId()).get();
+
+		sc.setNomSousCompetence(d.getNomSousCompetence());
+		sc.setCommentaireSC(d.getCommentaireSC());
+		sc.setDateSC(d.getDateSC());
+		sc.setEvaluation(d.getEvaluation());
+		sc.setManager(d.getManager());
+		System.out.println("hello****"+sc);
+		
+		return sousCompetenceRepository.save(sc);
 	}
 
 	@Override
@@ -50,5 +61,7 @@ public ISousCompetenceRepository sousCompetenceRepository;
 		// TODO Auto-generated method stub
 		return sousCompetenceRepository.findByEmployeeId(employeeId);
 	}
+
+	
 
 }

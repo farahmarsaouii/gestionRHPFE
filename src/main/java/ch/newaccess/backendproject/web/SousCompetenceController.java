@@ -63,7 +63,8 @@ public class SousCompetenceController {
 	public SousCompetence updateSousCompetence(@RequestBody SousCompetence d) {
 		return sousCompetenceService.updateSousCompetence(d);
 	}
-
+	
+	
 	/*
 	 * @GetMapping("/sousCompetencesparCompetence") public List<SousCompetence>
 	 * getSousCompetencesparCompetence(@RequestParam("idCompetence") Long
@@ -79,12 +80,12 @@ public class SousCompetenceController {
 		return sousCompetenceService.findByEmployee(idUser);
 
 	}
-//e
-	@GetMapping("/getSousCompetenceParCompetenceparUser")
+
+/*	@GetMapping("/getSousCompetenceParCompetenceparUser")
 	public Map<String, List<CompetenceDto>> getSousCompetenceParCompetenceparUser(
 			@RequestParam("idUser") Long idUser) {
 		System.out.print(idUser);
-//		System.out.print(userService.findUserByid(idUser));
+		System.out.print(userService.findUserByid(idUser));
 		AppUser user = userService.findUserByid(idUser);
 
 		listeSousCompetence = sousCompetenceService.findByEmployee(idUser);
@@ -120,10 +121,6 @@ public class SousCompetenceController {
 		}
 
 		return hashMap2;
-	}
-// akkeka theb ? adheka howa el matloub .? maw hakeka wela le hhhhhhhhhhhh hhhh yekhy el sujet mte3i wala mte3ek ena mfas5a taw
-	// ken mouch romdhane rani 9olt haja okhra ama madnheb dodo
-	// hayya hassiou douce nuit ghodwa chouf w 9olli c bn ou nn esmaa amanaman 9oli chaamlt b dhabtt fi msg vocal
-	// behy mela lahdha matsakkarch el pc bch yabda el code 9oddemi si nn nensa behiii
-	//hayya barra or9ed aychek aychekk aychek rabbi yraychek :phhhhhhhhhyya ena hani khrajt bye byee 
+	}*/
+ 
 }
