@@ -31,7 +31,9 @@ public IPlanDeCarriereRepository planDeCarriereRepository;
 
 	@Override
 	public PlanDeCarriere updatePlanDeCarriere(PlanDeCarriere d) {
-		return planDeCarriereRepository.save(d);
+		PlanDeCarriere planDeCarriere=planDeCarriereRepository.findById(d.getId()).get();
+		planDeCarriere.setEmplyee(d.getEmplyee());
+		return planDeCarriereRepository.save(planDeCarriere);
 	}
 
 	@Override

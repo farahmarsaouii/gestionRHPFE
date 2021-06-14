@@ -115,6 +115,9 @@ public AppUser updateUser(AppUser user) {
 	u.setIdSuperieurhierarchique(user.getIdSuperieurhierarchique());
 	u.setPoste(u.getPoste());
 	u.setRole(u.getRole());
+	u.setImage(u.getImage());
+	u.setPassword(u.getPassword());
+	u.setRepassword(u.getRepassword());
 	return userRespository.save(u);
 }
 

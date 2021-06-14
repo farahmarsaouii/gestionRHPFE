@@ -35,7 +35,7 @@ private Long id;
 	private String email;
 	private int cin;
 	private String repassword;
-	private String fileName;
+	
 	@ManyToOne
 	private AppUser idSuperieurhierarchique;
 	@OneToMany(mappedBy = "idSuperieurhierarchique")
@@ -83,6 +83,13 @@ private Collection<SousCompetence> sousCompetence =new ArrayList<SousCompetence>
 @JsonIgnore
 private Collection<SousCompetence> sousCompetenceEmployee =new ArrayList<SousCompetence>();
 
+@OneToMany(mappedBy = "rhFactureFournisseur")
+@JsonIgnore
+private Collection<FactureFournisseur> facturesFournisseurs;
+
+@OneToMany(mappedBy = "rhFournisseur")
+@JsonIgnore
+private Collection<Fournisseur> fournisseurs;
 
 public AppUser(Long id, String userName, String password, AppRole role) {
 	super();
@@ -278,12 +285,7 @@ public Collection<SousCompetence> getSousCompetenceEmployee() {
 public void setSousCompetenceEmployee(Collection<SousCompetence> sousCompetenceEmployee) {
 	this.sousCompetenceEmployee = sousCompetenceEmployee;
 }
-public String getFileName() {
-	return fileName;
-}
-public void setFileName(String fileName) {
-	this.fileName = fileName;
-}
+
 @JsonIgnore
 @JsonProperty("employees") 
 public List<AppUser> getEmployees() {

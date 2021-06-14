@@ -13,23 +13,25 @@ public class TypeFactureServiceImpl implements ITypeFactureService{
 	@Autowired
 public ITypeFactureRepository typeFactureRepository;
 	@Override
-	public Optional<TypeFacture> findTypeFacture(Long idTypeFacture) {
+	public Optional<TypeFacture> findTypeFacture(Long idTypeFacture){
 		return typeFactureRepository.findById(idTypeFacture);
 	}
 
 	@Override
-	public TypeFacture addTypeFacture(TypeFacture d) {
+	public TypeFacture addTypeFacture(TypeFacture d){
 		return typeFactureRepository.save(d);
 	}
 
 	@Override
-	public List<TypeFacture> listeTypeFacture() {
+	public List<TypeFacture> listeTypeFacture(){
 		return typeFactureRepository.findAll();
 	}
 
 	@Override
-	public TypeFacture updateTypeFacture(TypeFacture d) {
-		return typeFactureRepository.save(d);
+	public TypeFacture updateTypeFacture(TypeFacture d){
+		TypeFacture type=typeFactureRepository.findById(d.getId()).get();
+		type.setNomTypeFacture(d.getNomTypeFacture());
+		return typeFactureRepository.save(type);
 	}
 
 	@Override

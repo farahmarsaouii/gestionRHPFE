@@ -22,10 +22,6 @@ import ch.newaccess.backendproject.entities.Equipe;
 public class UserDetailsServiceImpl implements UserDetailsService{
 	@Autowired
 private AccountService accountService;
-	//public UserDetails loadUserByuserName(String userName) throws userNameNotFoundException {
-		
-	//	return null;
-	//}
 
 	@Override
 	public UserDetails loadUserByUsername(String userName)throws UsernameNotFoundException {
@@ -58,14 +54,13 @@ private AccountService accountService;
 		
 	}
 	public List<AppUser> findByEquipeAndRole(Equipe equipe, AppRole role) {
-		// TODO Auto-generated method stub
 		return accountService.findByEquipeAndRole(equipe,role) ;
 	}
-	public AppUser updateUser(AppUser user) {
-		// TODO Auto-generated method stub
-		return accountService.updateUser(user);
+/*	public AppUser updateUser(AppUser user) {
+		AppUser utilisateur=accountService.findUserByid(user.getId());
+		return accountService.updateUser(utilisateur);
 	}
-
+*/
 	
 	public void deleteUserById(Long idUser) {
 		accountService.deleteUser(idUser);

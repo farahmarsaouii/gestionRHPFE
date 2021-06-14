@@ -19,13 +19,11 @@ public class PrivilegeServiceImpl implements IPrivilegeService{
 	private PrivilegeRepository privilegeRepository;
 	@Override
 	public AppPrivilege findPrivilegeById(Long idPrivilege) {
-		// TODO Auto-generated method stub
 		return privilegeRepository.findById(idPrivilege).get();
 	}
 
 	@Override
 	public AppPrivilege addPrivilege(AppPrivilege privilege) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -48,25 +46,22 @@ public class PrivilegeServiceImpl implements IPrivilegeService{
 
 	@Override
 	public AppPrivilege updatePrivilege(AppPrivilege privilege) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void deletePrivilege(Long id) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public List<AppPrivilege> listePrivilege() {
-		// TODO Auto-generated method stub
 		return privilegeRepository.findAll();
 	}
 
 	@Override
 	public AppPrivilege findPrivilegeByName(String privilegeName) {
-		// TODO Auto-generated method stub
 		return privilegeRepository.findByprivilege(privilegeName);
 	}
 

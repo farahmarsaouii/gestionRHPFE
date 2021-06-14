@@ -44,13 +44,11 @@ public IPosteRepository posteRepository;
 
 	@Override
 	public Poste findByUsers(AppUser users) {
-		// TODO Auto-generated method stub
 		return posteRepository.findByUsers(users);
 	}
 
 	@Override
 	public Poste findById(Long id) {
-		// TODO Auto-generated method stub
 		return posteRepository.findById(id).get();
 	}
 

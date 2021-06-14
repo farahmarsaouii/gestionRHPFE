@@ -75,15 +75,34 @@ public class AccountRestController {
 	@Autowired
 	private AccountService accountService;
 	@Autowired  ServletContext context;
+	@Autowired
+	IimageRepository imageRepository;
 	List<AppUser> listeusers= new ArrayList<AppUser>();
 	 List<AppUser> listef ;
 	
-	
+	 public static byte[] compressBytes(byte[] data) {
+			Deflater deflater = new Deflater();
+			deflater.setInput(data);
+			deflater.finish();
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+			byte[] buffer = new byte[1024];
+			while (!deflater.finished()) {
+				int count = deflater.deflate(buffer);
+				outputStream.write(buffer, 0, count);
+			}
+			try {
+				outputStream.close();
+			} catch (IOException e) {
+			}
+			System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+			return outputStream.toByteArray();
+		}
 	
 	 
 	@PostMapping("/register")
-//public AppUser register(@RequestParam("user") String username,@RequestParam("imageFile") MultipartFile file)throws JsonParseException , JsonMappingException , Exception{
-	public AppUser register(@RequestBody AppUser userForm){	
+//public AppUser register(@RequestParam("imageFile") MultipartFile file,@RequestParam("user") String userName) throws IOException{
+		public AppUser register(@RequestBody AppUser userForm){	
+	
 		/*if(!userForm.getPassword().equals(userForm.getRepassword())) throw new RuntimeException("you must confirm your password");
 		AppUser user=accountService.findUserByUsername(userForm.getUserName());
 		if(user!=null) throw new RuntimeException("this user already exists");*/
@@ -94,6 +113,8 @@ public class AccountRestController {
         appUser=user;
         accountService.saveUser(appUser);*/
 		
+		
+	
 		AppUser appUser =new AppUser();
 		appUser.setUserName(userForm.getUserName());
 		appUser.setPoste(userForm.getPoste());
@@ -164,13 +185,18 @@ return appUser;
 			 userDto.setId(user.getId());
 			 userDto.setName(user.getUserName());
 			 userDto.setTitle(user.getPoste().getNomPoste());
-			// userDto.setImg(null);
+			 if(imageRepository.findByUser(user).isEmpty()) {userDto.setImg( "../../assets/img/pngjoy.com_gray-circle-login-user-icon-png-transparent-png_2750635.png");}else {
+			 userDto.setImg("data:image/jpeg;base64,"+user.getImage().getPicByte());}
 		}else {
 				 userDto.setId(user.getId());
 				 userDto.setName(user.getUserName());
 				 userDto.setPid(user.getIdSuperieurhierarchique().getId());
 				 userDto.setTitle(user.getPoste().getNomPoste());
-				// userDto.setImg(null);}
+				 if(imageRepository.findByUser(user).isEmpty()) {
+					 
+   userDto.setImg( "../../assets/img/pngjoy.com_gray-circle-login-user-icon-png-transparent-png_2750635.png");}
+				 else {
+				 userDto.setImg("data:image/jpeg;base64,"+user.getImage().getPicByte());}
 				
 				 
 				
@@ -179,7 +205,9 @@ return appUser;
 		 listeUsersDto.add(userDto);
 		 
      }
-		 return listeUsersDto;}
+		 return listeUsersDto;
+		 
+}
 	
 	@GetMapping("/getUserById")
 	public AppUser getUser(@RequestParam("user-id") Long idUser){
@@ -200,9 +228,8 @@ return appUser;
 		AppRole role = roleRespository.findByrole("employeeRole");
 	Equipe equipe = equipeRespository.findById(idequipe).get();
 		
-		return accountService.findByEquipeAndRole(equipe, role);
+		return accountService.findByEquipeAndRole(equipe, role);		
 		
-	
 }
 	
 	@GetMapping("/getByPrivilege")

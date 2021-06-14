@@ -58,7 +58,6 @@ public ISousCompetenceRepository sousCompetenceRepository;
 
 	@Override
 	public List<SousCompetence> findByEmployee(Long employeeId) {
-		// TODO Auto-generated method stub
 		return sousCompetenceRepository.findByEmployeeId(employeeId);
 	}
 

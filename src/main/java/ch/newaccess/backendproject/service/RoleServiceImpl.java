@@ -71,7 +71,6 @@ public class RoleServiceImpl implements IRoleService{
 
 @Override
 public List<AppRole> listeRole() {
-	// TODO Auto-generated method stub
 	return roleRespository.findAll();
 }
 

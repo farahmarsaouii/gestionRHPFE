@@ -2,19 +2,22 @@ package ch.newaccess.backendproject.web;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import ch.newaccess.backendproject.entities.AppUser;
-import ch.newaccess.backendproject.entities.Facture;
+import ch.newaccess.backendproject.entities.PieceDeCaisse;
 import ch.newaccess.backendproject.entities.ImageModel;
 import ch.newaccess.backendproject.repository.IimageRepository;
 import ch.newaccess.backendproject.service.AccountService;
@@ -26,13 +29,26 @@ public class ImageController {
 	@Autowired
 	IimageRepository imageRepository;
 	@PostMapping("/add-image")
-	public ImageModel addImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
+	public ImageModel addImage(@RequestParam("imageFile") MultipartFile file,@RequestParam("user") String username) throws IOException {
 		System.out.println("Original Image Byte Size ************* - " + file.getBytes().length);
-		//,@RequestParam("user") String username
-		//AppUser user=accountService.findUserByUsername(username);
-	//	ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),compressBytes(file.getBytes()),user);
-		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),compressBytes(file.getBytes()));
-		return imageRepository.save(img);
+		//,@RequestParam("user") AppUser username
+		AppUser user=accountService.findUserByUsername(username);
+		if(imageRepository.findByUser(user).isEmpty()) {
+
+			ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),compressBytes(file.getBytes()));
+			img.setUser(user);
+			
+			return imageRepository.save(img);
+		}else {
+			ImageModel image=imageRepository.findByUser(user).get();
+			image.setName(file.getOriginalFilename());
+			image.setPicByte(compressBytes(file.getBytes()));
+			image.setType(file.getContentType());
+			
+			return imageRepository.save(image);
+		
+		}
+		
 	}
 	// compress the image bytes before storing it in the database
 			public static byte[] compressBytes(byte[] data) {
@@ -68,5 +84,19 @@ public class ImageController {
 				} catch (DataFormatException e) {
 				}
 				return outputStream.toByteArray();
+			}
+			
+			@GetMapping("image")
+			public ImageModel getImage(@RequestParam("userName") String userName) throws IOException {
+				AppUser user=accountService.findUserByUsername(userName);
+				if(imageRepository.findByUser(user).isEmpty()) 
+				{return null;}
+				else
+				{
+				final Optional<ImageModel> retrievedImage = imageRepository.findByUser(user);
+				ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
+						decompressBytes(retrievedImage.get().getPicByte()));
+			
+				return img;}
 			}
 }

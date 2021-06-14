@@ -31,8 +31,11 @@ public IDemandeDocumentRepository demandeDocumentRepository;
 
 	@Override
 	public DemandeDocument updateDemandeDocument(DemandeDocument d) {
-	
-		return demandeDocumentRepository.save(d);
+	DemandeDocument demandeDoc =demandeDocumentRepository.findById(d.getId()).get();
+	demandeDoc.setCommentaire(d.getCommentaire());
+	demandeDoc.setDate(d.getDate());
+	demandeDoc.setRaisonDocument(d.getRaisonDocument());
+		return demandeDocumentRepository.save(demandeDoc);
 	}
 
 	@Override

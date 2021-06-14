@@ -17,14 +17,14 @@ public class TypeFacture{
 	@Id	@GeneratedValue
 	private Long id;
 	private String nomTypeFacture;
-	@OneToMany(mappedBy = "typeFacture")
-	@JsonIgnore
-	private Collection<Facture> factures =new ArrayList<Facture>();
-	public TypeFacture(Long id, String nomTypeFacture, Collection<Facture> factures) {
+	//@OneToMany(mappedBy = "typeFacture")
+	//@JsonIgnore
+	//private Collection<PieceDeCaisse> factures =new ArrayList<PieceDeCaisse>();
+	public TypeFacture(Long id, String nomTypeFacture) {
 		super();
 		this.id = id;
 		this.nomTypeFacture = nomTypeFacture;
-		this.factures = factures;
+	
 	}
 	public TypeFacture() {
 		super();
@@ -41,12 +41,7 @@ public class TypeFacture{
 	public void setNomTypeFacture(String nomTypeFacture) {
 		this.nomTypeFacture = nomTypeFacture;
 	}
-	public Collection<Facture> getFactures() {
-		return factures;
-	}
-	public void setFactures(Collection<Facture> factures) {
-		this.factures = factures;
-	}
+	
 	
 	
 }

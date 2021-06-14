@@ -30,8 +30,13 @@ public class CompetenceServiceImpl implements ICompetenceService{
 
 	@Override
 	public Competence updateCompetence(Competence c) {
-		
-		return competenceRepository.save(c);
+		Competence competence =competenceRepository.findById(c.getId()).get();
+		competence.setDateModif(c.getDateModif());
+		competence.setNomCompetence(c.getNomCompetence());
+		competence.setRh(c.getRh());
+		competence.setPoste(c.getPoste());
+		competence.setType(c.getType());
+		return competenceRepository.save(competence);
 	}
 
 	@Override

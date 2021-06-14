@@ -34,7 +34,6 @@ public class EquipeServiceImlp implements IEquipeService{
 	public Equipe updateEquipe(Equipe equipe) {
 		Equipe e= equipeRepository.findById(equipe.getId()).get();
 		e.setNomEquipe(equipe.getNomEquipe());
-	
 		return equipeRepository.save(e);
 
 	}
